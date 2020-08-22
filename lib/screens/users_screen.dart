@@ -24,6 +24,25 @@ class _UsersScreenState extends State<UsersScreen> {
     _user = await FirebaseAuth.instance.currentUser();
   }
 
+  Future<void> _sendInvite(String userId) async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    DocumentSnapshot myData =
+        await Firestore.instance.collection('users').document(user.uid).get();
+    await Firestore.instance
+        .collection('users')
+        .document(userId)
+        .collection('friends')
+        .document(user.uid)
+        .setData({
+      'sentBy': user.uid,
+      'sentBy_imageUrl': myData.data['image_url'],
+      'sentBy_username': myData.data['username'],
+      'sentTo': userId,
+      'sentAt': Timestamp.now(),
+      'accepted': 'no',
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +169,49 @@ class _UsersScreenState extends State<UsersScreen> {
                                     color: Theme.of(context).backgroundColor,
                                   ),
                                   onPressed: () {
-                                    ///....
+                                    _sendInvite(docs[index]['userId']);
+                                    showDialog(
+                                        context: context,
+                                        child: new AlertDialog(
+                                          backgroundColor:
+                                              Theme.of(context).accentColor,
+                                          title: new Text(
+                                            "Invite has been sent",
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .backgroundColor),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          content: Container(
+                                            height: 150,
+                                            child: Column(
+                                              children: <Widget>[
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    bottom: 10,
+                                                  ),
+                                                  height: 70,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            'assets/logo.png'),
+                                                        fit: BoxFit.contain),
+                                                  ),
+                                                ),
+                                                Center(
+                                                    child: RaisedButton(
+                                                  color: Theme.of(context)
+                                                      .backgroundColor,
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('OK'),
+                                                )),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
                                   })
                             ],
                           );
