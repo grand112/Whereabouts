@@ -32,6 +32,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       _isLoading = true;
     });
     FirebaseUser _user = await FirebaseAuth.instance.currentUser();
+    final userData = await Firestore.instance.collection('users').document(_user.uid).get();
     final refPhoto = FirebaseStorage.instance.ref().child('place_images').child(
         _user.uid +
             ',' +
@@ -57,6 +58,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       'address': _readableAddress,
       'mapUrl': _previewImageUrl,
       'imageUrl': urlPhoto,
+      'discoveredBy': userData['username']
     });
 
     setState(() {

@@ -56,8 +56,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _checkIfFriend() async {
     bool isFriend;
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    print('dupa:' + widget.userId);
-    print('blada:' + user.uid);
     QuerySnapshot isFriendQuery = await Firestore.instance
         .collection('users')
         .document(widget.userId)

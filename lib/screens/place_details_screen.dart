@@ -82,7 +82,23 @@ class PlaceDetailsScreen extends StatelessWidget {
                 errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
-            Text('MADE BY: TO DO!!!!!')
+            Container(
+              margin: EdgeInsets.only(
+                bottom: 25,
+                right: 40,
+                left: 40,
+              ),
+              child: Text(
+                data['address'],
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Text(
+              'Discovered by: ' + data['discoveredBy'],
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),

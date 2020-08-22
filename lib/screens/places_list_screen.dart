@@ -11,6 +11,27 @@ class PlacesListScreen extends StatefulWidget {
 }
 
 class _PlacesListScreenState extends State<PlacesListScreen> {
+  Future<List<DocumentSnapshot>> _getFriendsPlaces() async {
+    List<DocumentSnapshot> friendsPlaces = [];
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    QuerySnapshot friendsQuery = await Firestore.instance
+        .collection('users')
+        .document(user.uid)
+        .collection('friends')
+        .getDocuments();
+    await Future.wait(friendsQuery.documents.map((friend) async {
+      QuerySnapshot friendsPlacesQuery = await Firestore.instance
+          .collection('users')
+          .document(friend['sentBy'])
+          .collection('places')
+          .getDocuments();
+      friendsPlacesQuery.documents.forEach((place) {
+        friendsPlaces.add(place);
+      });
+    }));
+    return friendsPlaces;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +39,7 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Your great places',
+          'Great places',
           style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold),
@@ -47,58 +68,122 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
             ],
           ),
         ),
-        child: FutureBuilder(
-            future: FirebaseAuth.instance.currentUser(),
-            builder: (ctx, user) {
-              if (user.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              return StreamBuilder(
-                stream: Firestore.instance
-                    .collection('users')
-                    .document(user.data.uid)
-                    .collection('places')
-                    .snapshots(),
-                builder: (ctx, futureSnapshot) {
-                  if (futureSnapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  final placesDocs = futureSnapshot.data.documents;
-                  if (placesDocs.length == 0) {
-                    return Container(
-                      width: double.infinity,
-                      child: Center(
-                        child: Text(
-                          'A bit empty here  :(\n\nAdd some places to share',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    itemBuilder: (ctx, index) {
-                      return Places(
-                        placesDocs[index]['address'],
-                        placesDocs[index]['imageUrl'],
-                        placesDocs[index]['info'],
-                        placesDocs[index]['mapUrl'],
-                        placesDocs[index]['name'],
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 25,
+                    bottom: 10,
+                  ),
+                  child: Text(
+                    'Places discovered by you',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                FutureBuilder(
+                    future: FirebaseAuth.instance.currentUser(),
+                    builder: (ctx, user) {
+                      if (user.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return StreamBuilder(
+                        stream: Firestore.instance
+                            .collection('users')
+                            .document(user.data.uid)
+                            .collection('places')
+                            .snapshots(),
+                        builder: (ctx, futureSnapshot) {
+                          if (futureSnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          final placesDocs = futureSnapshot.data.documents;
+                          if (placesDocs.length == 0) {
+                            return Container(
+                              width: double.infinity,
+                              child: Center(
+                                child: Text(
+                                  'A bit empty here  :(\n\nAdd some places to share',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                          }
+                          return ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder: (ctx, index) {
+                              return Places(
+                                placesDocs[index]['address'],
+                                placesDocs[index]['imageUrl'],
+                                placesDocs[index]['info'],
+                                placesDocs[index]['mapUrl'],
+                                placesDocs[index]['name'],
+                                placesDocs[index]['discoveredBy'],
+                                true
+                              );
+                            },
+                            itemCount: placesDocs.length,
+                          );
+                        },
                       );
-                    },
-                    itemCount: placesDocs.length,
-                  );
-                },
-              );
-            }),
+                    }),
+                Container(margin: EdgeInsets.only(top:25,bottom:10,),
+                  child: Text(
+                    'Places discovered by your friends',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                FutureBuilder(
+                  future: _getFriendsPlaces(),
+                  builder: (ctx, places) {
+                    if (places.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (ctx, index) {
+                        return Places(
+                          places.data[index]['address'],
+                          places.data[index]['imageUrl'],
+                          places.data[index]['info'],
+                          places.data[index]['mapUrl'],
+                          places.data[index]['name'],
+                          places.data[index]['discoveredBy'],
+                          false
+                        );
+                      },
+                      itemCount: places.data.length,
+                    );
+                  },
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
