@@ -220,7 +220,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
-                            _isFriend
+                            !_isFriend
                                 ? RaisedButton.icon(
                                     icon: Icon(Icons.add),
                                     shape: RoundedRectangleBorder(
