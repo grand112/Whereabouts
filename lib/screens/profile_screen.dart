@@ -92,6 +92,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .get();
   }
 
+  Future<void> _removeFriend() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    Firestore.instance.collection('users').document(user.uid).collection('friends').document(widget.userId).delete();
+    Firestore.instance.collection('users').document(widget.userId).collection('friends').document(user.uid).delete();
+     setState(() {
+      _isFriend = !_isFriend;
+    });
+  }
+
   Future<void> _sendInvite() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     DocumentSnapshot myData =
@@ -108,6 +117,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       'sentTo': widget.userId,
       'sentAt': Timestamp.now(),
       'accepted': 'no',
+    });
+    setState(() {
+      _isFriend = !_isFriend;
     });
   }
 
@@ -272,12 +284,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     },
                                     label: Text('Add to friends'),
                                   )
-                                : Text(
-                                    'This user is your friend',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
+                                : RaisedButton.icon(
+                                    icon: Icon(Icons.delete),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25),
                                     ),
-                                  ),
+                                    color: Theme.of(context).errorColor,
+                                    onPressed: () {
+                                      _removeFriend();
+                                      showDialog(
+                                        context: context,
+                                        child: new AlertDialog(
+                                          backgroundColor:
+                                              Theme.of(context).accentColor,
+                                          title: new Text(
+                                            "User has been removed from your friend list",
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .backgroundColor),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          content: Container(
+                                            height: 150,
+                                            child: Column(
+                                              children: <Widget>[
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    bottom: 10,
+                                                  ),
+                                                  height: 70,
+                                                  decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: AssetImage(
+                                                            'assets/logo.png'),
+                                                        fit: BoxFit.contain),
+                                                  ),
+                                                ),
+                                                Center(
+                                                    child: RaisedButton(
+                                                  color: Theme.of(context)
+                                                      .backgroundColor,
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text('OK'),
+                                                )),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    label: Text('Remove friend'),
+                                  )
                           ],
                         ),
                         Container(
