@@ -58,11 +58,11 @@ class _FriendsListState extends State<FriendsList> {
               return docs.length == 0
                   ? Container(
                       child: Text(
-                        'You don\'t have any friends yet   :(\n\nTry to add some bellow!',
+                        'You don\'t have any friends yet   :(\n\nTry to add some!',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Theme.of(context).backgroundColor),
+                            color: Colors.white),
                       ),
                       margin: EdgeInsets.all(25),
                     )

@@ -99,7 +99,7 @@ class _RequestsState extends State<Requests> {
                       'You don\'t have any pending friend invites',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Theme.of(context).backgroundColor),
+                          color: Colors.white),
                     ),
                     margin: EdgeInsets.all(25),
                   )

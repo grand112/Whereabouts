@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../screens/users_screen.dart';
 import '../helpers/location_helper.dart';
 import '../screens/pick_circle_screen.dart';
 
@@ -287,162 +288,202 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                     ),
                     _user == null
                         ? Container()
-                        : Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
+                        : Container(
+                            width: double.infinity,
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
                               ),
-                            ),
-                            margin: EdgeInsets.only(
-                              top: 15,
-                              bottom: 15,
-                              left: 10,
-                              right: 10,
-                            ),
-                            color: Theme.of(context).accentColor,
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                top: 10,
-                                bottom: 10,
+                              margin: EdgeInsets.only(
+                                top: 15,
+                                bottom: 15,
+                                left: 10,
+                                right: 10,
                               ),
-                              child: StreamBuilder(
-                                stream: Firestore.instance
-                                    .collection('users')
-                                    .document(_user.uid)
-                                    .collection('friends')
-                                    .where("accepted", isEqualTo: "yes")
-                                    .snapshots(),
-                                builder: (ctx, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.none) {
-                                    return Center(
-                                      child: Icon(Icons.error),
-                                    );
-                                  }
-                                  final docs = snapshot.data.documents;
-                                  return docs.length == 0
-                                      ? Container(
-                                          child: Text(
-                                            'You don\'t have any friends yet   :(\n\nTry to add some bellow!',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Theme.of(context)
-                                                    .backgroundColor),
-                                          ),
-                                          margin: EdgeInsets.all(25),
-                                        )
-                                      : ListView.builder(
-                                          scrollDirection: Axis.vertical,
-                                          shrinkWrap: true,
-                                          itemBuilder: (ctx, index) {
-                                            return docs[index]['userId'] ==
-                                                    _user.uid
-                                                ? Container()
-                                                : Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: <Widget>[
-                                                      Container(
-                                                        margin: EdgeInsets.only(
-                                                            left: 10),
-                                                        child: ClipOval(
-                                                          child: Container(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .backgroundColor,
-                                                            child:
-                                                                CachedNetworkImage(
-                                                              fit: BoxFit.cover,
-                                                              height: 50,
-                                                              width: 50,
-                                                              imageUrl: docs[
-                                                                      index][
-                                                                  'sentBy_imageUrl'],
-                                                              placeholder: (context,
-                                                                      url) =>
-                                                                  CircularProgressIndicator(),
-                                                              errorWidget: (context,
-                                                                      url,
-                                                                      error) =>
-                                                                  Icon(Icons
-                                                                      .error),
-                                                            ),
-                                                          ),
-                                                        ),
+                              color: Theme.of(context).accentColor,
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                  top: 10,
+                                  bottom: 10,
+                                ),
+                                child: StreamBuilder(
+                                  stream: Firestore.instance
+                                      .collection('users')
+                                      .document(_user.uid)
+                                      .collection('friends')
+                                      .where("accepted", isEqualTo: "yes")
+                                      .snapshots(),
+                                  builder: (ctx, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    }
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.none) {
+                                      return Center(
+                                        child: Icon(Icons.error),
+                                      );
+                                    }
+                                    final docs = snapshot.data.documents;
+                                    return docs.length == 0
+                                        ? Container(
+                                            margin: EdgeInsets.only(
+                                              top: 15,
+                                              bottom: 15,
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'You don\'t have any friends yet   :(\n\nTry to add some!',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15,
+                                                    color: Colors.white,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 10,
+                                                  ),
+                                                  child: RaisedButton.icon(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                        Radius.circular(20),
                                                       ),
-                                                      Expanded(
-                                                        child: Container(
+                                                    ),
+                                                    color: Theme.of(context)
+                                                        .backgroundColor,
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pushNamed(UsersScreen
+                                                              .routeName);
+                                                    },
+                                                    icon: Icon(Icons.add),
+                                                    label: Text(
+                                                      'Add friends',
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : ListView.builder(
+                                            scrollDirection: Axis.vertical,
+                                            shrinkWrap: true,
+                                            itemBuilder: (ctx, index) {
+                                              return docs[index]['userId'] ==
+                                                      _user.uid
+                                                  ? Container()
+                                                  : Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: <Widget>[
+                                                        Container(
                                                           margin:
                                                               EdgeInsets.only(
-                                                            top: 25,
-                                                            bottom: 25,
-                                                            left: 20,
-                                                          ),
-                                                          child: Text(
-                                                            docs[index][
-                                                                'sentBy_username'],
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 17,
-                                                                color: Colors
-                                                                    .white),
+                                                                  left: 10),
+                                                          child: ClipOval(
+                                                            child: Container(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .backgroundColor,
+                                                              child:
+                                                                  CachedNetworkImage(
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                                height: 50,
+                                                                width: 50,
+                                                                imageUrl: docs[
+                                                                        index][
+                                                                    'sentBy_imageUrl'],
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    CircularProgressIndicator(),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    Icon(Icons
+                                                                        .error),
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      _pickedUsers.contains(
-                                                              docs[index]
-                                                                  ['sentBy'])
-                                                          ? Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                right: 15,
-                                                              ),
-                                                              child: Text(
-                                                                'User has been added',
-                                                                style: TextStyle(
-                                                                    color: Theme.of(
-                                                                            context)
-                                                                        .backgroundColor),
-                                                              ),
-                                                            )
-                                                          : Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                right: 15,
-                                                              ),
-                                                              child: IconButton(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .backgroundColor,
-                                                                  icon: Icon(
-                                                                      Icons
-                                                                          .add),
-                                                                  onPressed:
-                                                                      () {
-                                                                    setState(
-                                                                        () {
-                                                                      _pickedUsers.add(
-                                                                          docs[index]
-                                                                              [
-                                                                              'sentBy']);
-                                                                    });
-                                                                  }),
+                                                        Expanded(
+                                                          child: Container(
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                              top: 25,
+                                                              bottom: 25,
+                                                              left: 20,
                                                             ),
-                                                    ],
-                                                  );
-                                          },
-                                          itemCount: docs.length,
-                                        );
-                                },
+                                                            child: Text(
+                                                              docs[index][
+                                                                  'sentBy_username'],
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 17,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        _pickedUsers.contains(
+                                                                docs[index]
+                                                                    ['sentBy'])
+                                                            ? Container(
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .only(
+                                                                  right: 15,
+                                                                ),
+                                                                child: Text(
+                                                                  'User has been added',
+                                                                  style: TextStyle(
+                                                                      color: Theme.of(
+                                                                              context)
+                                                                          .backgroundColor),
+                                                                ),
+                                                              )
+                                                            : Container(
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .only(
+                                                                  right: 15,
+                                                                ),
+                                                                child:
+                                                                    IconButton(
+                                                                        color: Theme.of(context)
+                                                                            .backgroundColor,
+                                                                        icon: Icon(Icons
+                                                                            .add),
+                                                                        onPressed:
+                                                                            () {
+                                                                          setState(
+                                                                              () {
+                                                                            _pickedUsers.add(docs[index]['sentBy']);
+                                                                          });
+                                                                        }),
+                                                              ),
+                                                      ],
+                                                    );
+                                            },
+                                            itemCount: docs.length,
+                                          );
+                                  },
+                                ),
                               ),
                             ),
                           ),

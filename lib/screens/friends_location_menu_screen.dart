@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../screens/friends_location_menu_screen.dart';
-import '../screens/manage_friend_list_screen.dart';
+import '../screens/add_track_place_screen.dart';
+import '../screens/friends_location_screen.dart';
 
-class FriendsScreen extends StatefulWidget {
+class FriendsLocationMenuScreen extends StatefulWidget {
+  static const routeName = '/friends-location-menu-screen';
+
   @override
-  _FriendsScreenState createState() => _FriendsScreenState();
+  _FriendsLocationMenuScreenState createState() =>
+      _FriendsLocationMenuScreenState();
 }
 
-class _FriendsScreenState extends State<FriendsScreen> {
+class _FriendsLocationMenuScreenState extends State<FriendsLocationMenuScreen> {
   @override
   Widget build(BuildContext context) {
     final double heightOfScreen = MediaQuery.of(context).size.height;
@@ -17,7 +20,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Stay in touch with your friends',
+          'Find your firends on a map',
           style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold),
@@ -36,12 +39,11 @@ class _FriendsScreenState extends State<FriendsScreen> {
           ),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             GestureDetector(
               onTap: () {
                 Navigator.of(context)
-                    .pushNamed(FriendsLocationMenuScreen.routeName);
+                    .pushNamed(FriendsLocationScreen.routeName);
               },
               child: Container(
                 margin: EdgeInsets.only(
@@ -58,11 +60,11 @@ class _FriendsScreenState extends State<FriendsScreen> {
                   child: Column(
                     children: [
                       Container(
-                        height: heightOfScreen * 0.3,
+                        height: heightOfScreen * 0.33,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('assets/map.png'),
-                              fit: BoxFit.contain),
+                              image: AssetImage('assets/map_marker.png'),
+                              fit: BoxFit.cover),
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),
                           ),
@@ -74,7 +76,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                           bottom: 10,
                         ),
                         child: Text(
-                          'Track your friends location on a map',
+                          'Find your friends on a map',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).backgroundColor,
@@ -88,8 +90,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.of(context)
-                    .pushNamed(ManageFriendListScreen.routeName);
+                Navigator.of(context).pushNamed(AddTrackPlaceScreen.routeName);
               },
               child: Container(
                 margin: EdgeInsets.only(
@@ -106,10 +107,10 @@ class _FriendsScreenState extends State<FriendsScreen> {
                   child: Column(
                     children: [
                       Container(
-                        height: heightOfScreen * 0.3,
+                        height: heightOfScreen * 0.33,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('assets/friends.jpg'),
+                              image: AssetImage('assets/circle.png'),
                               fit: BoxFit.cover),
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),
@@ -122,7 +123,7 @@ class _FriendsScreenState extends State<FriendsScreen> {
                           bottom: 10,
                         ),
                         child: Text(
-                          'Manage your friend list',
+                          'Monitor particular area and get notifications',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).backgroundColor,

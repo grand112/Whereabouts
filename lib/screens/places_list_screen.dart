@@ -1,4 +1,5 @@
 import 'package:Whereabouts/screens/add_place_screen.dart';
+import 'package:Whereabouts/screens/friends_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -121,8 +122,8 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                               child: Center(
                                 child: Container(
                                   margin: EdgeInsets.only(
-                                    top: 10,
-                                    bottom: 10,
+                                    top: 20,
+                                    bottom: 20,
                                   ),
                                   child: Column(
                                     children: [
@@ -131,8 +132,7 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15,
-                                          color:
-                                              Theme.of(context).backgroundColor,
+                                          color: Colors.white,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -221,17 +221,44 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                         child: Center(
                           child: Container(
                             margin: EdgeInsets.only(
-                              top: 10,
-                              bottom: 10,
+                              top: 20,
+                              bottom: 20,
                             ),
-                            child: Text(
-                              'Your friends have no places to share yet.\n\nEncourage them to add some :)',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                color: Theme.of(context).backgroundColor,
-                              ),
-                              textAlign: TextAlign.center,
+                            child: Column(
+                              children: <Widget>[
+                                Text(
+                                  'Your friends have no places to share yet.\n\nEncourage them to add some :)',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    top: 10,
+                                  ),
+                                  child: RaisedButton.icon(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                    color: Theme.of(context).backgroundColor,
+                                    onPressed: () {
+                                      FriendsScreen();
+                                    },
+                                    icon: Icon(Icons.chat),
+                                    label: Text(
+                                      'Send a message',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),

@@ -68,7 +68,6 @@ flutter:
     - assets/person.jpg
     - assets/beach.jpg
     - assets/picnic.jpg
-    - assets/car_icon.png
     - assets/arrow.png
     - assets/arrow_you.png
     - assets/default_avatar.png
@@ -77,6 +76,10 @@ flutter:
     - assets/logo_title_white.png
     - assets/title_black.png
     - assets/title_white.png
+    - assets/friends.jpg
+    - assets/map.png
+    - assets/map_marker.png
+    - assets/circle.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import './screens/friends_location_menu_screen.dart';
+import './screens/manage_friend_list_screen.dart';
 import './screens/loading_screen.dart';
 import './screens/auth_screen.dart';
 import './screens/welcome_screen.dart';
@@ -57,6 +59,9 @@ class Whereabouts extends StatelessWidget {
         AddTrackPlaceScreen.routeName: (ctx) => AddTrackPlaceScreen(),
         PermissionScreen.routeName: (ctx) => PermissionScreen(),
         UsersScreen.routeName: (ctx) => UsersScreen(),
+        ManageFriendListScreen.routeName: (ctx) => ManageFriendListScreen(),
+        FriendsLocationMenuScreen.routeName: (ctx) =>
+            FriendsLocationMenuScreen(),
       },
     );
   }
