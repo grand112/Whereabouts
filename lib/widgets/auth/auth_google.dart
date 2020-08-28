@@ -53,6 +53,7 @@ class _GoogleAuthState extends State<GoogleAuth> {
       assert(user.uid == currentUser.uid);
       Navigator.of(context).pushReplacementNamed(PermissionScreen.routeName);
     } catch (err) {
+      print(err);
       setState(() {
         _isLoading = false;
       });
