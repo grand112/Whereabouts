@@ -5,6 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import './message_bubble.dart';
 
 class Messages extends StatefulWidget {
+  final String toUserId;
+  final FirebaseUser user;
+
+  Messages(
+    this.toUserId,
+    this.user,
+  );
+
   @override
   _MessagesState createState() => _MessagesState();
 }
@@ -13,7 +21,7 @@ class _MessagesState extends State<Messages> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: FirebaseAuth.instance.currentUser(), // waiting for future
+      future: FirebaseAuth.instance.currentUser(),
       builder: (ctx, futureSnapshot) {
         if (futureSnapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -22,7 +30,9 @@ class _MessagesState extends State<Messages> {
         }
         return StreamBuilder(
           stream: Firestore.instance
-              .collection('chat')
+              .collection('chats')
+              .document(widget.user.uid + ':' + widget.toUserId)
+              .collection(widget.user.uid + ':' + widget.toUserId)
               .orderBy(
                 'createdAt',
                 descending: true,
@@ -40,9 +50,10 @@ class _MessagesState extends State<Messages> {
               itemCount: chatDocs.length,
               itemBuilder: (ctx, index) => MessageBubble(
                 chatDocs[index]['text'],
-                chatDocs[index]['username'],
-                chatDocs[index]['userImage'],
-                chatDocs[index]['userId'] == futureSnapshot.data.uid, //returns true or false
+                chatDocs[index]['sentByUsername'],
+                chatDocs[index]['sentByUserImage'],
+                chatDocs[index]['sentBy'] ==
+                    futureSnapshot.data.uid, //returns true or false
                 key: ValueKey(chatDocs[index].documentID),
               ),
             );

@@ -4,14 +4,25 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 exports.myFunction = functions.firestore
-  .document('chat/{message}')
-  .onCreate((snapshot, context) => {
-    return admin.messaging().sendToTopic('chat', {
+  .document('chats/{chatIdDocument}/{chatIdCollection}/{message}')
+  .onCreate(async snapshot => {
+
+    const message = snapshot.data();
+
+    const querySnapshot = await admin.firestore()
+      .collection('users')
+      .doc(message.sentTo)
+      .collection('tokens')
+      .get();
+
+    const tokens = querySnapshot.docs.map(snap => snap.id);
+
+    return admin.messaging().sendToDevice(tokens, {
       notification: {
-        title: snapshot.data().username,
-        body: snapshot.data().text,
+        title: `${message.sentByUsername} sent you a message!`,
+        body: message.text,
         clickAction: 'FLUTTER_NOTIFICATION_CLICK',
-      },
+      }
     });
   });
 

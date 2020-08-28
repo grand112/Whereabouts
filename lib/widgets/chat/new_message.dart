@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewMessage extends StatefulWidget {
+  final String toUserId;
+  final FirebaseUser user;
+
+  NewMessage(
+    this.toUserId,
+    this.user,
+  );
+
   @override
   _NewMessageState createState() => _NewMessageState();
 }
@@ -12,19 +20,43 @@ class _NewMessageState extends State<NewMessage> {
   var _enteredMessage = '';
 
   void _sendMessage() async {
-    // send message to sever
     FocusScope.of(context).unfocus();
-    final user =
-        await FirebaseAuth.instance.currentUser(); // take userId form server
-    final userData =
-        await Firestore.instance.collection('users').document(user.uid).get();
-    Firestore.instance.collection('chat').add(
+    final userData = await Firestore.instance
+        .collection('users')
+        .document(widget.user.uid)
+        .get();
+    final toUserData = await Firestore.instance
+        .collection('users')
+        .document(widget.toUserId)
+        .get();
+
+    await Firestore.instance
+        .collection('chats')
+        .document(widget.user.uid + ':' + widget.toUserId)
+        .collection(widget.user.uid + ':' + widget.toUserId)
+        .add({
+      'text': _enteredMessage,
+      'createdAt': Timestamp.now(),
+      'sentBy': widget.user.uid,
+      'sentTo': widget.toUserId,
+      'sentByUsername': userData['username'],
+      'sentToUsername': toUserData['username'],
+      'sentByUserImage': userData['image_url'],
+    });
+
+    await Firestore.instance
+        .collection('chats')
+        .document(widget.toUserId + ':' + widget.user.uid)
+        .collection(widget.toUserId + ':' + widget.user.uid)
+        .add(
       {
         'text': _enteredMessage,
         'createdAt': Timestamp.now(),
-        'userId': user.uid,
-        'username': userData['username'],
-        'userImage': userData['image_url'],
+        'sentBy': widget.user.uid,
+        'sentTo': widget.toUserId,
+        'sentByUsername': userData['username'],
+        'sentToUsername': toUserData['username'],
+        'sentByUserImage': userData['image_url'],
       },
     );
     _controller.clear();

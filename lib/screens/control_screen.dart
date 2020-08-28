@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../screens/select_chat_screen.dart';
 import '../screens/home_screen.dart';
-import '../screens/chat_screen.dart';
 import '../screens/friends_screen.dart';
 import '../screens/places_list_screen.dart';
 
@@ -107,6 +107,7 @@ class _ControlScreenState extends State<ControlScreen>
       return;
     }, onResume: (msg) {
       //Navigator.of(context).pushNamed(WelcomeScreen.routeName);
+      print('resume from message');
       print(msg);
       return;
     });
@@ -118,7 +119,7 @@ class _ControlScreenState extends State<ControlScreen>
 
   final List<Widget> _pages = [
     HomeScreen(),
-    ChatScreen(),
+    SelectChatScreen(),
     FriendsScreen(),
     PlacesListScreen(),
   ];

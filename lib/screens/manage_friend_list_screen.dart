@@ -119,7 +119,7 @@ class _ManageFriendListScreenState extends State<ManageFriendListScreen> {
                     valueColor: AlwaysStoppedAnimation<Color>(
                         Theme.of(context).backgroundColor),
                   )
-                : FriendsList(_user),
+                : FriendsList(_user,true),
             Container(
               child: Text(
                 'Friend invites',
