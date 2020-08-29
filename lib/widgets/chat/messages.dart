@@ -49,7 +49,6 @@ class _MessagesState extends State<Messages> {
   Stream<QuerySnapshot> _checkStorages() {
     if (_store1.documents.length == 0) {
       if (_store2.documents.length == 0) {
-        print(1);
         return Firestore.instance
             .collection('chats')
             .document(widget.user.uid + ':' + widget.toUserId)
@@ -60,7 +59,6 @@ class _MessagesState extends State<Messages> {
             )
             .snapshots();
       } else if (_store2.documents.length != 0) {
-        print(2);
         return Firestore.instance
             .collection('chats')
             .document(widget.toUserId + ':' + widget.user.uid)
@@ -72,7 +70,6 @@ class _MessagesState extends State<Messages> {
             .snapshots();
       }
     } 
-    print(3);
     return Firestore.instance
         .collection('chats')
         .document(widget.user.uid + ':' + widget.toUserId)
