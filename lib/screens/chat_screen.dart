@@ -27,7 +27,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     _getUserData();
   }
-  
+
   Future<void> _getUserData() async {
     DocumentSnapshot userData = await Firestore.instance
         .collection('users')
@@ -42,6 +42,9 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).backgroundColor,
+        ),
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: _userData == null

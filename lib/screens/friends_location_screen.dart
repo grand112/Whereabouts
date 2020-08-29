@@ -360,6 +360,9 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Theme.of(context).backgroundColor,
+          ),
           brightness: Brightness.dark,
           backgroundColor: Theme.of(context).accentColor,
           title: Text(

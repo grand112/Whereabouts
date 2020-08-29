@@ -32,6 +32,9 @@ class _ManageFriendListScreenState extends State<ManageFriendListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+         iconTheme: IconThemeData(
+          color: Theme.of(context).backgroundColor,
+        ),
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(

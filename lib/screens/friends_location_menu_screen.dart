@@ -17,6 +17,9 @@ class _FriendsLocationMenuScreenState extends State<FriendsLocationMenuScreen> {
     final double heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+         iconTheme: IconThemeData(
+          color: Theme.of(context).backgroundColor,
+        ),
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
