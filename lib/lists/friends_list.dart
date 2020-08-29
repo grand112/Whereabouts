@@ -1,9 +1,9 @@
+import 'package:Whereabouts/widgets/chat/chat_info.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/chat_screen.dart';
 import '../screens/users_screen.dart';
 import '../screens/profile_screen.dart';
 
@@ -174,86 +174,11 @@ class _FriendsListState extends State<FriendsList> {
                                       ),
                                     ],
                                   )
-                                : GestureDetector(
-                                    behavior: HitTestBehavior.opaque,
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => ChatScreen(
-                                            docs[index]['sentBy'],
-                                            widget.user,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        Container(
-                                          margin: EdgeInsets.only(left: 10),
-                                          child: ClipOval(
-                                            child: Container(
-                                              color: Theme.of(context)
-                                                  .backgroundColor,
-                                              child: CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                height: 50,
-                                                width: 50,
-                                                imageUrl: docs[index]
-                                                    ['sentBy_imageUrl'],
-                                                placeholder: (context, url) =>
-                                                    CircularProgressIndicator(),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                              top: 15,
-                                              bottom: 15,
-                                              left: 20,
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  docs[index]
-                                                      ['sentBy_username'],
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 17,
-                                                      color: Colors.white),
-                                                ),
-                                                Text(
-                                                  'From: last message',
-                                                  style: TextStyle(
-                                                      color: Colors.grey),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                            right: 20,
-                                          ),
-                                          child: Text(
-                                            '16:59',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  );
+                                : ChatInfo(
+                                    docs[index]['sentBy'],
+                                    docs[index]['sentBy_imageUrl'],
+                                    docs[index]['sentBy_username'],
+                                    widget.user);
                       },
                       itemCount: docs.length,
                     );
