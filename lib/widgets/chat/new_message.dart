@@ -21,6 +21,8 @@ class _NewMessageState extends State<NewMessage> {
 
   void _sendMessage() async {
     FocusScope.of(context).unfocus();
+    _controller.clear();
+
     final userData = await Firestore.instance
         .collection('users')
         .document(widget.user.uid)
@@ -30,26 +32,56 @@ class _NewMessageState extends State<NewMessage> {
         .document(widget.toUserId)
         .get();
 
-    await Firestore.instance
+    final store1 = await Firestore.instance
         .collection('chats')
         .document(widget.user.uid + ':' + widget.toUserId)
         .collection(widget.user.uid + ':' + widget.toUserId)
-        .add({
-      'text': _enteredMessage,
-      'createdAt': Timestamp.now(),
-      'sentBy': widget.user.uid,
-      'sentTo': widget.toUserId,
-      'sentByUsername': userData['username'],
-      'sentToUsername': toUserData['username'],
-      'sentByUserImage': userData['image_url'],
-    });
+        .getDocuments();
 
-    await Firestore.instance
+    final store2 = await Firestore.instance
         .collection('chats')
         .document(widget.toUserId + ':' + widget.user.uid)
         .collection(widget.toUserId + ':' + widget.user.uid)
-        .add(
-      {
+        .getDocuments();
+
+    if (store1.documents.length == 0) {
+      if (store2.documents.length == 0) {
+        await Firestore.instance
+            .collection('chats')
+            .document(widget.user.uid + ':' + widget.toUserId)
+            .collection(widget.user.uid + ':' + widget.toUserId)
+            .add({
+          'text': _enteredMessage,
+          'createdAt': Timestamp.now(),
+          'sentBy': widget.user.uid,
+          'sentTo': widget.toUserId,
+          'sentByUsername': userData['username'],
+          'sentToUsername': toUserData['username'],
+          'sentByUserImage': userData['image_url'],
+        });
+      } else if (store2.documents.length != 0) {
+        await Firestore.instance
+            .collection('chats')
+            .document(widget.toUserId + ':' + widget.user.uid)
+            .collection(widget.toUserId + ':' + widget.user.uid)
+            .add(
+          {
+            'text': _enteredMessage,
+            'createdAt': Timestamp.now(),
+            'sentBy': widget.user.uid,
+            'sentTo': widget.toUserId,
+            'sentByUsername': userData['username'],
+            'sentToUsername': toUserData['username'],
+            'sentByUserImage': userData['image_url'],
+          },
+        );
+      }
+    } else if (store1.documents.length != 0) {
+      await Firestore.instance
+          .collection('chats')
+          .document(widget.user.uid + ':' + widget.toUserId)
+          .collection(widget.user.uid + ':' + widget.toUserId)
+          .add({
         'text': _enteredMessage,
         'createdAt': Timestamp.now(),
         'sentBy': widget.user.uid,
@@ -57,9 +89,8 @@ class _NewMessageState extends State<NewMessage> {
         'sentByUsername': userData['username'],
         'sentToUsername': toUserData['username'],
         'sentByUserImage': userData['image_url'],
-      },
-    );
-    _controller.clear();
+      });
+    }
   }
 
   @override
