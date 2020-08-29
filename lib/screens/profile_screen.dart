@@ -157,8 +157,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     builder: (ctx, futureSnapshot) {
                       if (futureSnapshot.connectionState ==
                           ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
+                        return Container(
+                          height: 1,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         );
                       }
                       if (futureSnapshot.connectionState ==

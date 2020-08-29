@@ -92,8 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (ctx, futureSnapshot) {
                       if (futureSnapshot.connectionState ==
                           ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
+                        return Container(
+                          height: 1,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         );
                       }
                       if (futureSnapshot.connectionState ==
@@ -167,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ConnectionState.waiting) {
                       return Container(
                         margin: EdgeInsets.only(
-                          top: heightOfScreen*0.3,
+                          top: heightOfScreen * 0.3,
                         ),
                         child: Center(
                           child: CircularProgressIndicator(
