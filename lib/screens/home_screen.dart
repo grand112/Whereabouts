@@ -202,7 +202,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Theme.of(context).backgroundColor,
                               onPressed: () {
                                 Navigator.of(context)
-                                    .pushNamed(EditProfileScreen.routeName);
+                                    .pushNamed(EditProfileScreen.routeName).whenComplete(() => setState(() {}));
+                                
                               },
                               child: Text('Edit Profile'),
                             ),

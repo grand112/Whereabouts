@@ -68,7 +68,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     setState(() {
       _isLoading = false;
     });
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(context);
   }
 
   Future<void> _getUserData() async {
@@ -156,7 +156,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 color: Theme.of(context).backgroundColor,
                 onPressed: () async {
                   File pickedImage = await ImagePicker.pickImage(
-                      imageQuality: 50, source: ImageSource.camera);
+                      imageQuality: 50, source: ImageSource.gallery);
                   setState(() {
                     _pickedBackground = pickedImage;
                   });
