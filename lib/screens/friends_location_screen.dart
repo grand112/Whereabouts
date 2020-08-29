@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import './chat_screen.dart';
 import './profile_screen.dart';
 
 class FriendsLocationScreen extends StatefulWidget {
@@ -292,9 +293,29 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
                                 ),
                                 element.document.data['userId'] == _user.uid
                                     ? Container()
+                                    : IconButton(
+                                        icon: Icon(
+                                          Icons.message,
+                                          color:
+                                              Theme.of(context).backgroundColor,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ChatScreen(
+                                                element.document.data['userId'],
+                                                _user,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                element.document.data['userId'] == _user.uid
+                                    ? Container()
                                     : Container(
                                         margin: EdgeInsets.only(
-                                          left: 15,
+                                          left: 5,
                                         ),
                                         child: RaisedButton(
                                           shape: RoundedRectangleBorder(

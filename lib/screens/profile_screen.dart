@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/chat_screen.dart';
+
 class ProfileScreen extends StatefulWidget {
   final String userId;
 
@@ -19,6 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int _friendsCount;
   int _trackedCount;
   bool _isFriend;
+  FirebaseUser _user;
 
   @override
   void initState() {
@@ -27,6 +30,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _getFriendsCount();
     _checkIfFriend();
     _getTrackedCount();
+    _getUser();
+  }
+
+  Future<void> _getUser() async {
+    _user = await FirebaseAuth.instance.currentUser();
   }
 
   Future<void> _getFriendsCount() async {
@@ -47,7 +55,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .collection('circles')
         .where('userId', isEqualTo: widget.userId)
         .getDocuments();
-    List<DocumentSnapshot> trackedPlacesDocuments = trackedPlacesQuery.documents;
+    List<DocumentSnapshot> trackedPlacesDocuments =
+        trackedPlacesQuery.documents;
     setState(() {
       _trackedCount = trackedPlacesDocuments.length;
     });
@@ -94,9 +103,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _removeFriend() async {
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    Firestore.instance.collection('users').document(user.uid).collection('friends').document(widget.userId).delete();
-    Firestore.instance.collection('users').document(widget.userId).collection('friends').document(user.uid).delete();
-     setState(() {
+    Firestore.instance
+        .collection('users')
+        .document(user.uid)
+        .collection('friends')
+        .document(widget.userId)
+        .delete();
+    Firestore.instance
+        .collection('users')
+        .document(widget.userId)
+        .collection('friends')
+        .document(user.uid)
+        .delete();
+    setState(() {
       _isFriend = !_isFriend;
     });
   }
@@ -199,8 +218,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   builder: (ctx, futureSnapshot) {
                     if (futureSnapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(),
+                      return Container(
+                        margin: EdgeInsets.only(
+                          top: heightOfScreen * 0.3,
+                        ),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                          ),
+                        ),
                       );
                     }
                     if (futureSnapshot.connectionState ==
@@ -230,113 +256,158 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
-                            !_isFriend
-                                ? RaisedButton.icon(
-                                    icon: Icon(Icons.add),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    color: Theme.of(context).backgroundColor,
-                                    onPressed: () {
-                                      _sendInvite();
-                                      showDialog(
-                                        context: context,
-                                        child: new AlertDialog(
-                                          backgroundColor:
-                                              Theme.of(context).accentColor,
-                                          title: new Text(
-                                            "Invite has been sent",
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .backgroundColor),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          content: Container(
-                                            height: 150,
-                                            child: Column(
-                                              children: <Widget>[
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                    bottom: 10,
-                                                  ),
-                                                  height: 70,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/logo.png'),
-                                                        fit: BoxFit.contain),
-                                                  ),
-                                                ),
-                                                Center(
-                                                    child: RaisedButton(
-                                                  color: Theme.of(context)
-                                                      .backgroundColor,
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Text('OK'),
-                                                )),
-                                              ],
-                                            ),
-                                          ),
+                            Column(
+                              children: <Widget>[
+                                !_isFriend
+                                    ? RaisedButton.icon(
+                                        icon: Icon(
+                                          Icons.add,
+                                          size: 20,
                                         ),
-                                      );
-                                    },
-                                    label: Text('Add to friends'),
-                                  )
-                                : RaisedButton.icon(
-                                    icon: Icon(Icons.delete),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    color: Theme.of(context).errorColor,
-                                    onPressed: () {
-                                      _removeFriend();
-                                      showDialog(
-                                        context: context,
-                                        child: new AlertDialog(
-                                          backgroundColor:
-                                              Theme.of(context).accentColor,
-                                          title: new Text(
-                                            "User has been removed from your friend list",
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .backgroundColor),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          content: Container(
-                                            height: 150,
-                                            child: Column(
-                                              children: <Widget>[
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                    bottom: 10,
-                                                  ),
-                                                  height: 70,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/logo.png'),
-                                                        fit: BoxFit.contain),
-                                                  ),
-                                                ),
-                                                Center(
-                                                    child: RaisedButton(
-                                                  color: Theme.of(context)
-                                                      .backgroundColor,
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Text('OK'),
-                                                )),
-                                              ],
-                                            ),
-                                          ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
                                         ),
-                                      );
-                                    },
-                                    label: Text('Remove friend'),
-                                  )
+                                        color:
+                                            Theme.of(context).backgroundColor,
+                                        onPressed: () {
+                                          _sendInvite();
+                                          showDialog(
+                                            context: context,
+                                            child: new AlertDialog(
+                                              backgroundColor:
+                                                  Theme.of(context).accentColor,
+                                              title: new Text(
+                                                "Invite has been sent",
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .backgroundColor),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              content: Container(
+                                                height: 150,
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                        bottom: 10,
+                                                      ),
+                                                      height: 70,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                'assets/logo.png'),
+                                                            fit:
+                                                                BoxFit.contain),
+                                                      ),
+                                                    ),
+                                                    Center(
+                                                        child: RaisedButton(
+                                                      color: Theme.of(context)
+                                                          .backgroundColor,
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Text('OK'),
+                                                    )),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        label: Text('Add to friends'),
+                                      )
+                                    : RaisedButton.icon(
+                                        icon: Icon(
+                                          Icons.delete,
+                                          size: 20,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                        ),
+                                        color: Theme.of(context).errorColor,
+                                        onPressed: () {
+                                          _removeFriend();
+                                          showDialog(
+                                            context: context,
+                                            child: new AlertDialog(
+                                              backgroundColor:
+                                                  Theme.of(context).accentColor,
+                                              title: new Text(
+                                                "User has been removed from your friend list",
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .backgroundColor),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              content: Container(
+                                                height: 150,
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                        bottom: 10,
+                                                      ),
+                                                      height: 70,
+                                                      decoration: BoxDecoration(
+                                                        image: DecorationImage(
+                                                            image: AssetImage(
+                                                                'assets/logo.png'),
+                                                            fit:
+                                                                BoxFit.contain),
+                                                      ),
+                                                    ),
+                                                    Center(
+                                                        child: RaisedButton(
+                                                      color: Theme.of(context)
+                                                          .backgroundColor,
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Text('OK'),
+                                                    )),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        label: Text('Remove friend'),
+                                      ),
+                                _isFriend
+                                    ? RaisedButton.icon(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                        ),
+                                        color:
+                                            Theme.of(context).backgroundColor,
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ChatScreen(
+                                                widget.userId,
+                                                _user,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.message,
+                                          size: 20,
+                                        ),
+                                        label: Text(
+                                          'Send a message',
+                                        ),
+                                      )
+                                    : Container(),
+                              ],
+                            ),
                           ],
                         ),
                         Container(
