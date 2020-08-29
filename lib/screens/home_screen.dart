@@ -54,7 +54,8 @@ class _HomeScreenState extends State<HomeScreen> {
         .collection('circles')
         .where('userId', isEqualTo: user.uid)
         .getDocuments();
-    List<DocumentSnapshot> trackedPlacesDocuments = trackedPlacesQuery.documents;
+    List<DocumentSnapshot> trackedPlacesDocuments =
+        trackedPlacesQuery.documents;
     setState(() {
       _trackedCount = trackedPlacesDocuments.length;
     });
@@ -164,8 +165,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (ctx, futureSnapshot) {
                     if (futureSnapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return Center(
-                        child: CircularProgressIndicator(),
+                      return Container(
+                        margin: EdgeInsets.only(
+                          top: heightOfScreen*0.3,
+                        ),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                          ),
+                        ),
                       );
                     }
                     if (futureSnapshot.connectionState ==
@@ -202,8 +210,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Theme.of(context).backgroundColor,
                               onPressed: () {
                                 Navigator.of(context)
-                                    .pushNamed(EditProfileScreen.routeName).whenComplete(() => setState(() {}));
-                                
+                                    .pushNamed(EditProfileScreen.routeName)
+                                    .whenComplete(() => setState(() {}));
                               },
                               child: Text('Edit Profile'),
                             ),
@@ -280,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   SizedBox(height: 10),
-                                 Text(
+                                  Text(
                                     _trackedCount == null
                                         ? ''
                                         : _trackedCount.toString(),
