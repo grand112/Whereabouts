@@ -31,6 +31,7 @@ class _AuthFormState extends State<AuthForm> {
   var _userName = '';
   var _userPassword = '';
   File _userImageFile;
+  bool _passwordHidden = true;
 
   void _pickedImage(File image) {
     _userImageFile = image;
@@ -184,9 +185,7 @@ class _AuthFormState extends State<AuthForm> {
                       ),
                     TextFormField(
                       key: ValueKey('password'),
-
-                      /// TO DO !!!! show password button
-                      obscureText: true,
+                      obscureText: _passwordHidden,
                       validator: (value) {
                         if (value.isEmpty || value.length < 7) {
                           return 'Password must be at least 7 characters long.';
@@ -199,6 +198,19 @@ class _AuthFormState extends State<AuthForm> {
                         labelText: 'Password',
                         labelStyle: TextStyle(
                           color: Theme.of(context).accentColor,
+                        ),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _passwordHidden
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.grey[700],
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _passwordHidden = !_passwordHidden;
+                            });
+                          },
                         ),
                       ),
                       onSaved: (value) {
@@ -231,11 +243,13 @@ class _AuthFormState extends State<AuthForm> {
                         Text(
                           _isLogin
                               ? 'You don\'t\nhave an account?'
-                              : 'Do you already\nhave an account?',textAlign: TextAlign.center,
+                              : 'Do you already\nhave an account?',
+                          textAlign: TextAlign.center,
                         ),
                         FlatButton(
                           child: Text(
-                            _isLogin ? 'Create new account' : 'Log in now',textAlign: TextAlign.center,
+                            _isLogin ? 'Create new account' : 'Log in now',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Theme.of(context).backgroundColor,
                               fontWeight: FontWeight.bold,
