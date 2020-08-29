@@ -408,47 +408,50 @@ class _ControlScreenState extends State<ControlScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_selectedPageIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        //showSelectedLabels: false,
-        //showUnselectedLabels: false,
-        onTap: _selectPage,
-        backgroundColor: Theme.of(context).accentColor,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Theme.of(context).backgroundColor,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30,
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: Scaffold(
+        body: _pages[_selectedPageIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          //showSelectedLabels: false,
+          //showUnselectedLabels: false,
+          onTap: _selectPage,
+          backgroundColor: Theme.of(context).accentColor,
+          unselectedItemColor: Colors.white,
+          selectedItemColor: Theme.of(context).backgroundColor,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                size: 30,
+              ),
+              title: Text('Home'),
             ),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.chat,
-              size: 30,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.chat,
+                size: 30,
+              ),
+              title: Text('Messages'),
             ),
-            title: Text('Messages'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people,
-              size: 30,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.people,
+                size: 30,
+              ),
+              title: Text('Friends'),
             ),
-            title: Text('Friends'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.location_on,
-              size: 30,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.location_on,
+                size: 30,
+              ),
+              title: Text('Places'),
             ),
-            title: Text('Places'),
-          ),
-        ],
-        currentIndex: _selectedPageIndex,
+          ],
+          currentIndex: _selectedPageIndex,
+        ),
       ),
     );
   }
