@@ -232,9 +232,30 @@ class Places extends StatelessWidget {
                             },
                           );
                         },
-                        child: Text(AppLocalizations.of(context)
-                            .translate('places', 'details')),
+                        child: Text(
+                          AppLocalizations.of(context)
+                              .translate('places', 'details'),
+                        ),
                       ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(
+                          Icons.fast_rewind,
+                          size: 25,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            right: 10,
+                            bottom: 1,
+                          ),
+                          child: Text(
+                            AppLocalizations.of(context)
+                                .translate('places', 'swipe'),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
