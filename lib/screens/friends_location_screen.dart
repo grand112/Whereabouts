@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -107,7 +108,10 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'This is the place which you added to track:',
+                                          AppLocalizations.of(context)
+                                              .translate(
+                                                  'friends_location_screen',
+                                                  'placeAdded'),
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
@@ -283,7 +287,8 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
                                 ),
                                 Text(
                                   element.document.data['userId'] == _user.uid
-                                      ? 'You'
+                                      ? AppLocalizations.of(context).translate(
+                                          'friends_location_screen', 'you')
                                       : element.document.data['userName'],
                                   style: TextStyle(
                                     color: Theme.of(context).backgroundColor,
@@ -338,7 +343,10 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
                                             );
                                           },
                                           child: Text(
-                                            'Profile',
+                                            AppLocalizations.of(context)
+                                                .translate(
+                                                    'friends_location_screen',
+                                                    'profile'),
                                             style: TextStyle(
                                               color: Colors.black,
                                             ),
@@ -387,7 +395,8 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
           brightness: Brightness.dark,
           backgroundColor: Theme.of(context).accentColor,
           title: Text(
-            'Current location of your friends: ',
+            AppLocalizations.of(context)
+                .translate('friends_location_screen', 'locationFriends'),
             style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold,

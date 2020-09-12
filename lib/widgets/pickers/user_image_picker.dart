@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -51,7 +52,8 @@ class _UserImagePickerState extends State<UserImagePicker> {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Choose your profile image:',
+                      AppLocalizations.of(context)
+                          .translate('user_image_picker', 'choose_image'),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                     ),
@@ -79,7 +81,10 @@ class _UserImagePickerState extends State<UserImagePicker> {
                                 size: 50,
                               ),
                             ),
-                            Text('Camera')
+                            Text(
+                              AppLocalizations.of(context)
+                                  .translate('user_image_picker', 'camera'),
+                            )
                           ],
                         ),
                         Column(
@@ -102,7 +107,10 @@ class _UserImagePickerState extends State<UserImagePicker> {
                                 size: 50,
                               ),
                             ),
-                            Text('Gallery')
+                            Text(
+                              AppLocalizations.of(context)
+                                  .translate('user_image_picker', 'gallery'),
+                            )
                           ],
                         ),
                       ],
@@ -125,7 +133,8 @@ class _UserImagePickerState extends State<UserImagePicker> {
                               right: 10,
                             ),
                             child: Text(
-                              "OR",
+                              AppLocalizations.of(context)
+                                  .translate('user_image_picker', 'or'),
                               style: TextStyle(color: Colors.grey[700]),
                             ),
                           ),
@@ -158,7 +167,10 @@ class _UserImagePickerState extends State<UserImagePicker> {
                               ),
                             ),
                             SizedBox(height: 3),
-                            Text('Default')
+                            Text(
+                              AppLocalizations.of(context)
+                                  .translate('user_image_picker', 'default'),
+                            )
                           ],
                         ),
                       ],
@@ -188,7 +200,10 @@ class _UserImagePickerState extends State<UserImagePicker> {
           textColor: Colors.black,
           onPressed: () => _pickImage(context),
           icon: Icon(Icons.image),
-          label: Text('Choose your\nprofile image'),
+          label: Text(
+            AppLocalizations.of(context)
+                .translate('user_image_picker', 'choose_profile_image'),
+          ),
         ),
       ],
     );

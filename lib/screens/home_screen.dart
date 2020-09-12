@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -216,7 +217,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .pushNamed(EditProfileScreen.routeName)
                                     .whenComplete(() => setState(() {}));
                               },
-                              child: Text('Edit Profile'),
+                              child: Text(
+                                AppLocalizations.of(context)
+                                    .translate('home_screen', 'edit'),
+                              ),
                             ),
                           ],
                         ),
@@ -234,7 +238,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: EdgeInsets.only(bottom: 10),
                           child: Text(
                             futureSnapshot.data['hobby'] == null
-                                ? 'Hobby/Proffesion'
+                                ? AppLocalizations.of(context)
+                                    .translate('home_screen', 'hobby')
                                 : futureSnapshot.data['hobby'],
                             style: TextStyle(
                               fontSize: 15,
@@ -246,7 +251,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           margin: EdgeInsets.only(bottom: 5),
                           child: Text(
                             futureSnapshot.data['about'] == null
-                                ? 'This user hasn\'t provided their profile description yet'
+                                ? AppLocalizations.of(context)
+                                    .translate('home_screen', 'noDescription')
                                 : futureSnapshot.data['about'],
                             style: TextStyle(
                               fontSize: 15,
@@ -264,7 +270,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    'FRIENDS',
+                                    AppLocalizations.of(context)
+                                        .translate('home_screen', 'friends'),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[400],
@@ -284,7 +291,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    'TRACKED PLACES',
+                                    AppLocalizations.of(context)
+                                        .translate('home_screen', 'tracked'),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[400],
@@ -304,7 +312,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    'DISCOVERED PLACES',
+                                    AppLocalizations.of(context)
+                                        .translate('home_screen', 'discovered'),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[400],

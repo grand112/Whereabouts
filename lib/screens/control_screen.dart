@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -132,12 +133,13 @@ class _ControlScreenState extends State<ControlScreen>
         child: AlertDialog(
           backgroundColor: Theme.of(context).accentColor,
           title: Text(
-            "You are not connected to the Internet!",
+            AppLocalizations.of(context)
+                .translate('control_screen', 'notConnected'),
             style: TextStyle(color: Theme.of(context).backgroundColor),
             textAlign: TextAlign.center,
           ),
           content: Container(
-            height: 240,
+            height: 330,
             child: Column(
               children: <Widget>[
                 Container(
@@ -150,7 +152,8 @@ class _ControlScreenState extends State<ControlScreen>
                   ),
                 ),
                 Text(
-                  "Without internet connection, we cannot provide you full usability.\nPlease connect your device to the internet to get access to all features of the app",
+                  AppLocalizations.of(context)
+                      .translate('control_screen', 'withoutConnection'),
                   style: TextStyle(color: Colors.white),
                 ),
                 Container(
@@ -426,28 +429,40 @@ class _ControlScreenState extends State<ControlScreen>
                 Icons.home,
                 size: 30,
               ),
-              title: Text('Home'),
+              title: Text(
+                AppLocalizations.of(context)
+                    .translate('control_screen', 'home'),
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.chat,
                 size: 30,
               ),
-              title: Text('Messages'),
+              title: Text(
+                AppLocalizations.of(context)
+                    .translate('control_screen', 'messages'),
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.people,
                 size: 30,
               ),
-              title: Text('Friends'),
+              title: Text(
+                AppLocalizations.of(context)
+                    .translate('control_screen', 'friends'),
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.location_on,
                 size: 30,
               ),
-              title: Text('Places'),
+              title: Text(
+                AppLocalizations.of(context)
+                    .translate('control_screen', 'places'),
+              ),
             ),
           ],
           currentIndex: _selectedPageIndex,

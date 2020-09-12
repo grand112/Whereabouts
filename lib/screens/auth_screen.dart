@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,7 +69,8 @@ class _AuthScreenState extends State<AuthScreen> {
       }
       Navigator.of(context).pushReplacementNamed(PermissionScreen.routeName);
     } on PlatformException catch (err) {
-      var message = 'An error occurred, please check your credentials!';
+      var message =
+          AppLocalizations.of(context).translate('auth_screen', 'error');
 
       if (err.message != null) {
         message = err.message;

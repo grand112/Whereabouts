@@ -1,5 +1,7 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import './screens/friends_location_menu_screen.dart';
 import './screens/manage_friend_list_screen.dart';
@@ -35,6 +37,27 @@ class Whereabouts extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
+      supportedLocales: [
+        Locale('en', 'US'),
+        Locale('pl', 'PL'),
+      ],
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      localeResolutionCallback: (locale, supportedLocales) {
+        for (var supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode &&
+              supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+          if (locale == null) {
+            locale = Localizations.localeOf(context);
+          }
+        }
+        return supportedLocales.first;
+      },
       home: StreamBuilder(
           builder: (ctx, userSnapshot) {
             if (userSnapshot.connectionState == ConnectionState.waiting) {

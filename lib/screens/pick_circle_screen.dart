@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -63,7 +64,8 @@ class _PickCircleScreenState extends State<PickCircleScreen> {
         backgroundColor: Theme.of(context).accentColor,
         brightness: Brightness.dark,
         title: Text(
-          'choose the places you want to follow:',
+          AppLocalizations.of(context)
+              .translate('pick_circle_screen', 'choosePlaces'),
           style: TextStyle(
             color: Theme.of(context).backgroundColor,
             fontWeight: FontWeight.bold,
@@ -141,7 +143,8 @@ class _PickCircleScreenState extends State<PickCircleScreen> {
                   Container(
                     margin: EdgeInsets.only(left: 10),
                     child: Text(
-                      'Change radius:',
+                      AppLocalizations.of(context)
+                          .translate('pick_circle_screen', 'radius'),
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
                     ),

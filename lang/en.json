@@ -1,0 +1,189 @@
+{
+  "welcome_screen": {
+    "title0": "What is Whereabouts?",
+    "content0": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "title1": "Discover",
+    "content1": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "title2": "Keep your family safe",
+    "content2": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "title3": "Stay in touch with your friends",
+    "content3": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "log_in": "LOG IN",
+    "create_account": "CREATE AN\n ACCOUNT"
+  },
+  "auth_form": {
+    "pick_image_error": "Please pick your profile image. If you don\\'t want to add your picture, choose the default one.",
+    "log_in": "LOG IN",
+    "sign_up": "SIGN UP",
+    "or": "OR",
+    "please_enter_email": "Please enter a valid email address.",
+    "email_address": "Email address",
+    "enter_characters": "Please enter at least 4 characters",
+    "username": "Username",
+    "password": "Password",
+    "password_length": "Password must be at least 7 characters long.",
+    "password_space": "Password cannot contain space",
+    "password_length_space": "Password must contain at least 7 characters and cannot contain space",
+    "dont_have_account": "You don\\'t\nhave an account?",
+    "have_account": "Do you already\nhave an account?",
+    "create_account": "Create new account",
+    "log_in_now": "Log in now"
+  },
+  "auth_google": {
+    "sign_up": "Sign in with Google"
+  },
+  "chat_info": {
+    "you": "you",
+    "no_messages": "no previous messages"
+  },
+  "new_message": {
+    "send_message": "Send a message"
+  },
+  "select_chat_screen": {
+    "chats": "Chats"
+  },
+  "home_drawer": {
+    "settings": "Settings",
+    "edit_profile": "Edit profile",
+    "log_out": "Log out"
+  },
+  "user_image_picker": {
+    "choose_image": "Choose your profile image:",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "or": "OR",
+    "default": "Default",
+    "choose_profile_image": "Choose your\nprofile image"
+  },
+  "places": {
+    "discovered_by": "Discovered by : ",
+    "details": "Details"
+  },
+  "add_place_screen": {
+    "provide_photo": "Please provide a photo of the place.",
+    "provide_location": "Please pick the location of the place.",
+    "provide_name": "Please pick the name of the place.",
+    "add_place": "ADD PLACE",
+    "provide_photo_place": "Provide photo of the place",
+    "take_photo": "Take a photo",
+    "or": "OR",
+    "pick_photo": "Pick a photo from gallery",
+    "provide_location_place": "Provide location of the place",
+    "current_location": " Use current location",
+    "select_location": "Select location on the Map",
+    "add_name": "Add the name of the place",
+    "description": "Description of the place",
+    "add": "ADD"
+  },
+  "places_list_screen": {
+    "discovered": "Discovered places",
+    "by_you": "Places discovered by you",
+    "empty_you": "A bit empty here  :(\n\nAdd some places to share",
+    "add": "Add new place",
+    "by_friends": "Places discovered by your friends",
+    "empty_friends": "Your friends have no places to share yet.\n\nEncourage them to add some :)",
+    "send": "Send a message"
+  },
+  "place_details_screen": {
+    "location": "Location: ",
+    "discovered_by": "Discovered by: "
+  },
+  "add_track_place_screen": {
+    "provideName": "Please provide a name of the place.",
+    "pickPlaceTrack": "Please pick a place to track.",
+    "pickFriend": "Please pick at least one friend to track.",
+    "addPlace": "ADD PLACE TO TRACK",
+    "provideCustomName": "Provide custom name of the place",
+    "addName": "Add the name",
+    "pickPlaceMap": "Pick the place on the map",
+    "pickPlace": "Pick the place",
+    "radius": "Radius: ",
+    "pickFriendTrack": "Pick friends to be tracked in your place",
+    "noFriends": "You don't have any friends yet   :(\n\nTry to add some!",
+    "addFriends": "Add friends",
+    "userAdded": "User has been added",
+    "add": "ADD"
+  },
+  "auth_screen": {
+    "error": "An error occurred, please check your credentials"
+  },
+  "control_screen": {
+    "notConnected": "You are not connected to the Internet",
+    "withoutConnection": "Without internet connection, we cannot provide you full usability.\nPlease connect your device to the internet to get access to all features of the app",
+    "home": "Home",
+    "messages": "Messages",
+    "friends": "Friends",
+    "places": "Places"
+  },
+  "edit_profile_screen": {
+    "changeBackground": "Change your background image",
+    "gallery": "Image from gallery",
+    "or": "OR",
+    "photo": "Take a photo",
+    "changeImage": "Change your profile image",
+    "changeUsername": "Change your username",
+    "changeHobby": "Provide your hobby or proffesion",
+    "about": "Say something about you:",
+    "aboutYou": "About you",
+    "save": "Save changes"
+  },
+  "friends_location_menu_screen": {
+    "findFriends": "Find your friends on a map",
+    "monitor": "Monitor particular area and get notifications"
+  },
+  "friends_location_screen": {
+    "placeAdded": "This is the place which you added to track:",
+    "you": "You",
+    "profile": "Profile",
+    "locationFriends": "Current location of your friends"
+  },
+  "friends_screen": {
+    "stay": "Stay in touch with your friends",
+    "track": "Track your friends location on a map",
+    "manage": "Manage your friend list"
+  },
+  "manage_friend_list_screen": {
+    "manage": "Manage your friend list",
+    "looking": "Looking for\nnew people?",
+    "add": "Add a friend",
+    "list": "List of your friends",
+    "invites": "Friend invites"
+  },
+  "permission_screen": {
+    "without": "Without your permission to get the location, our app cannot work properly. Please consider granting permission to have access to the app.",
+    "grant": "Grant permission",
+    "logOut": "Log out"
+  },
+  "pick_circle_screen": {
+    "choosePlaces": "Choose the places\nyou want to follow:",
+    "radius": "Change radius"
+  },
+  "pick_on_map_screen": {
+    "select": "Select place on map"
+  },
+  "profile_screen": {
+    "invite": "Invite has been sent",
+    "add": "Add to friends",
+    "removed": "User has been removed from your friend list",
+    "remove": "Remove friend",
+    "send": "Send a message",
+    "hobby": "Hobby/Proffestion",
+    "noDescription": "This user hasn't provided their profile description yet",
+    "friends": "FRIENDS",
+    "tracked": "TRACKED PLACES",
+    "discovered": "DISCOVERED PLACES"
+  },
+  "users_screen": {
+    "add": "Add a new friend",
+    "profile": "Profile",
+    "invite": "Invite has been sent"
+  },
+  "home_screen": {
+    "edit": "Edit profile",
+    "hobby": "Hobby/Proffestion",
+    "noDescription": "This user hasn't provided their profile description yet",
+    "friends": "FRIENDS",
+    "tracked": "TRACKED PLACES",
+    "discovered": "DISCOVERED PLACES"
+  }
+}

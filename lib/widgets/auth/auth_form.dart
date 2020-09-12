@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +52,9 @@ class _AuthFormState extends State<AuthForm> {
       Scaffold.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              'Please pick your profile image. If you don\'t want to add your picture, choose default one.'),
+            AppLocalizations.of(context)
+                .translate('auth_form', 'pick_image_error'),
+          ),
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
@@ -102,7 +105,11 @@ class _AuthFormState extends State<AuthForm> {
                     Padding(
                       padding: const EdgeInsets.all(10),
                       child: Text(
-                        _isLogin ? 'LOG IN' : 'SIGN UP',
+                        _isLogin
+                            ? AppLocalizations.of(context)
+                                .translate('auth_form', 'log_in')
+                            : AppLocalizations.of(context)
+                                .translate('auth_form', 'sign_up'),
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -123,7 +130,8 @@ class _AuthFormState extends State<AuthForm> {
                             right: 10,
                           ),
                           child: Text(
-                            "OR",
+                            AppLocalizations.of(context)
+                                .translate('auth_form', 'or'),
                             style: TextStyle(color: Colors.grey[700]),
                           ),
                         ),
@@ -146,13 +154,15 @@ class _AuthFormState extends State<AuthForm> {
                             !value.contains('@') ||
                             value.length < 4 ||
                             value.contains(' ')) {
-                          return 'Please enter a valid email address.';
+                          return AppLocalizations.of(context)
+                              .translate('auth_form', 'please_enter_email');
                         }
                         return null;
                       },
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
-                        labelText: 'Email address',
+                        labelText: AppLocalizations.of(context)
+                            .translate('auth_form', 'email_address'),
                         labelStyle: TextStyle(
                           color: Theme.of(context).accentColor,
                         ),
@@ -169,12 +179,14 @@ class _AuthFormState extends State<AuthForm> {
                         key: ValueKey('userName'),
                         validator: (value) {
                           if (value.isEmpty || value.length < 4) {
-                            return 'Please enter at least 4 characters';
+                            return AppLocalizations.of(context)
+                                .translate('auth_form', 'enter_characters');
                           }
                           return null;
                         },
                         decoration: InputDecoration(
-                          labelText: 'Username',
+                          labelText: AppLocalizations.of(context)
+                              .translate('auth_form', 'username'),
                           labelStyle: TextStyle(
                             color: Theme.of(context).accentColor,
                           ),
@@ -188,14 +200,17 @@ class _AuthFormState extends State<AuthForm> {
                       obscureText: _passwordHidden,
                       validator: (value) {
                         if (value.isEmpty || value.length < 7) {
-                          return 'Password must be at least 7 characters long.';
+                          return AppLocalizations.of(context)
+                              .translate('auth_form', 'password_length');
                         } else if (value.contains(' ')) {
-                          return 'Password cannot contain space';
+                          return AppLocalizations.of(context)
+                              .translate('auth_form', 'password_space');
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        labelText: 'Password',
+                        labelText: AppLocalizations.of(context)
+                              .translate('auth_form', 'password'),
                         labelStyle: TextStyle(
                           color: Theme.of(context).accentColor,
                         ),
@@ -220,7 +235,8 @@ class _AuthFormState extends State<AuthForm> {
                     Container(
                       margin: EdgeInsets.only(top: 5),
                       child: Text(
-                        'Password must contain at least 7 characters and cannot contain space',
+                        AppLocalizations.of(context)
+                            .translate('auth_form', 'password_length_space'),
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey,
@@ -232,7 +248,11 @@ class _AuthFormState extends State<AuthForm> {
                     if (!widget.isLoading)
                       RaisedButton(
                         child: Text(
-                          _isLogin ? 'LOG IN' : 'SIGN UP',
+                          _isLogin
+                              ? AppLocalizations.of(context)
+                                  .translate('auth_form', 'log_in')
+                              : AppLocalizations.of(context)
+                                  .translate('auth_form', 'sign_up'),
                         ),
                         onPressed: _trySubmit,
                       ),
@@ -242,13 +262,19 @@ class _AuthFormState extends State<AuthForm> {
                       children: <Widget>[
                         Text(
                           _isLogin
-                              ? 'You don\'t\nhave an account?'
-                              : 'Do you already\nhave an account?',
+                              ? AppLocalizations.of(context)
+                                  .translate('auth_form', 'dont_have_account')
+                              : AppLocalizations.of(context)
+                                  .translate('auth_form', 'have_account'),
                           textAlign: TextAlign.center,
                         ),
                         FlatButton(
                           child: Text(
-                            _isLogin ? 'Create new account' : 'Log in now',
+                            _isLogin
+                                ? AppLocalizations.of(context)
+                                    .translate('auth_form', 'create_account')
+                                : AppLocalizations.of(context)
+                                    .translate('auth_form', 'log_in_now'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Theme.of(context).backgroundColor,

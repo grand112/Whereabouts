@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -32,7 +33,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       _isLoading = true;
     });
     FirebaseUser _user = await FirebaseAuth.instance.currentUser();
-    final userData = await Firestore.instance.collection('users').document(_user.uid).get();
+    final userData =
+        await Firestore.instance.collection('users').document(_user.uid).get();
     final refPhoto = FirebaseStorage.instance.ref().child('place_images').child(
         _user.uid +
             ',' +
@@ -114,7 +116,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     if (_pickedImageFile == null) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
-          content: Text('Please provide a photo of the place.'),
+          content: Text(AppLocalizations.of(context)
+              .translate('add_place_screen', 'provide_photo')),
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
@@ -122,7 +125,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     } else if (_selectedLocation == null) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
-          content: Text('Please pick the location of the place.'),
+          content: Text(AppLocalizations.of(context)
+              .translate('add_place_screen', 'provide_location')),
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
@@ -130,7 +134,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     } else if (_enteredTitle == null) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
-          content: Text('Please pick the name of the place.'),
+          content: Text(AppLocalizations.of(context)
+              .translate('add_place_screen', 'provide_name')),
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
@@ -173,7 +178,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         bottom: 30,
                       ),
                       child: Text(
-                        'ADD PLACE',
+                        AppLocalizations.of(context)
+                            .translate('add_place_screen', 'add_place'),
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -185,7 +191,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         bottom: 15,
                       ),
                       child: Text(
-                        'Provide photo of the place:',
+                        AppLocalizations.of(context).translate(
+                            'add_place_screen', 'provide_photo_place'),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 17,
@@ -218,13 +225,15 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       },
                       icon: Icon(Icons.camera_alt),
                       label: Text(
-                        'Take a photo',
+                        AppLocalizations.of(context)
+                            .translate('add_place_screen', 'take_photo'),
                       ),
                     ),
                     SizedBox(height: 10),
                     Center(
                       child: Text(
-                        "OR",
+                        AppLocalizations.of(context)
+                            .translate('add_place_screen', 'or'),
                         style: TextStyle(color: Colors.grey[400]),
                       ),
                     ),
@@ -245,7 +254,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       },
                       icon: Icon(Icons.image),
                       label: Text(
-                        'Pick a photo from gallery',
+                        AppLocalizations.of(context)
+                            .translate('add_place_screen', 'pick_photo'),
                       ),
                     ),
                     SizedBox(
@@ -258,7 +268,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       height: 15,
                     ),
                     Text(
-                      'Provide location of the place:',
+                      AppLocalizations.of(context).translate(
+                          'add_place_screen', 'provide_location_place'),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
@@ -297,7 +308,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         Icons.location_on,
                       ),
                       label: Text(
-                        ' Use current location',
+                        AppLocalizations.of(context)
+                            .translate('add_place_screen', 'current_location'),
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
@@ -309,7 +321,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     SizedBox(height: 10),
                     Center(
                       child: Text(
-                        "OR",
+                        AppLocalizations.of(context)
+                            .translate('add_place_screen', 'or'),
                         style: TextStyle(color: Colors.grey[400]),
                       ),
                     ),
@@ -320,7 +333,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         Icons.map,
                       ),
                       label: Text(
-                        'Select location on  the Map',
+                        AppLocalizations.of(context)
+                            .translate('add_place_screen', 'select_location'),
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(
@@ -341,7 +355,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         autocorrect: true,
                         enableSuggestions: true,
                         decoration: InputDecoration(
-                          labelText: 'Add the name of the place',
+                          labelText: AppLocalizations.of(context)
+                              .translate('add_place_screen', 'add_name'),
                           labelStyle:
                               TextStyle(color: Theme.of(context).accentColor),
                         ),
@@ -364,7 +379,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         enableSuggestions: true,
                         maxLength: 150,
                         decoration: InputDecoration(
-                          labelText: 'Description of the place',
+                          labelText: AppLocalizations.of(context)
+                              .translate('add_place_screen', 'description'),
                           labelStyle:
                               TextStyle(color: Theme.of(context).accentColor),
                         ),
@@ -380,7 +396,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         ? CircularProgressIndicator()
                         : RaisedButton(
                             onPressed: () => _validate(ctx),
-                            child: Text('ADD'),
+                            child: Text(AppLocalizations.of(context)
+                                .translate('add_place_screen', 'add')),
                           )
                   ],
                 ),

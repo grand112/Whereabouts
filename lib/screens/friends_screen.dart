@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/friends_location_menu_screen.dart';
@@ -14,10 +15,11 @@ class _FriendsScreenState extends State<FriendsScreen> {
     final double heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Stay in touch with your friends',
+          AppLocalizations.of(context).translate('friends_screen', 'stay'),
           style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold),
@@ -74,7 +76,8 @@ class _FriendsScreenState extends State<FriendsScreen> {
                           bottom: 10,
                         ),
                         child: Text(
-                          'Track your friends location on a map',
+                          AppLocalizations.of(context)
+                              .translate('friends_screen', 'track'),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).backgroundColor,
@@ -122,7 +125,8 @@ class _FriendsScreenState extends State<FriendsScreen> {
                           bottom: 10,
                         ),
                         child: Text(
-                          'Manage your friend list',
+                          AppLocalizations.of(context)
+                              .translate('friends_screen', 'manage'),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).backgroundColor,

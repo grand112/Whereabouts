@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:Whereabouts/lists/friends_list.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,6 +34,7 @@ class _SelectChatScreenState extends State<SelectChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Row(
@@ -62,7 +64,8 @@ class _SelectChatScreenState extends State<SelectChatScreen> {
                 left: 10,
               ),
               child: Text(
-                'Chats',
+                AppLocalizations.of(context)
+                    .translate('select_chat_screen', 'chats'),
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),

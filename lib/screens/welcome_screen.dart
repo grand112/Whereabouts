@@ -88,8 +88,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           itemBuilder: (BuildContext context, int index) {
             return SwipeImage(
               docs[index]['image'],
-              docs[index]['title'],
-              docs[index]['content'],
+              index,
             );
           },
           pagination: SwiperPagination(),

@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -68,7 +69,8 @@ class PlaceDetailsScreen extends StatelessWidget {
               height: 15,
             ),
             Text(
-              'Location: ',
+              AppLocalizations.of(context)
+                  .translate('place_details_screen', 'location'),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
             Container(
@@ -94,7 +96,9 @@ class PlaceDetailsScreen extends StatelessWidget {
               ),
             ),
             Text(
-              'Discovered by: ' + data['discoveredBy'],
+              AppLocalizations.of(context)
+                      .translate('place_details_screen', 'discovered_by') +
+                  data['discoveredBy'],
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),

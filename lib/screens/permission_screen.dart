@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -63,7 +64,8 @@ class _PermissionScreenState extends State<PermissionScreen> {
                 ),
                 child: Text(
                   denied || restricted || permDenied || undetermined
-                      ? 'Without your permission, our app cannot work properly. Please consider granting permission to have access to the app.'
+                      ? AppLocalizations.of(context)
+                          .translate('permission_screen', 'without')
                       : '',
                   style: TextStyle(
                     color: Colors.white,
@@ -81,7 +83,8 @@ class _PermissionScreenState extends State<PermissionScreen> {
                           _getPermission();
                         },
                         child: Text(
-                          'Grant permission',
+                          AppLocalizations.of(context)
+                              .translate('permission_screen', 'grant'),
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
@@ -109,7 +112,8 @@ class _PermissionScreenState extends State<PermissionScreen> {
                               SizedBox(
                                 width: 8,
                               ),
-                              Text('Log out'),
+                              Text(AppLocalizations.of(context)
+                                  .translate('permission_screen', 'logOut')),
                             ],
                           ),
                         ),

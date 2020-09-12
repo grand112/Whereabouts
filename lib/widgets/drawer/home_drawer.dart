@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -44,7 +45,8 @@ class HomeDrawer extends StatelessWidget {
                   color: Theme.of(context).accentColor,
                 ),
                 title: Text(
-                  'Settings',
+                  AppLocalizations.of(context)
+                      .translate('home_drawer', 'settings'),
                   style: TextStyle(
                     fontSize: 18,
                   ),
@@ -74,7 +76,8 @@ class HomeDrawer extends StatelessWidget {
                   color: Theme.of(context).accentColor,
                 ),
                 title: Text(
-                  'Edit profile',
+                  AppLocalizations.of(context)
+                      .translate('home_drawer', 'edit_profile'),
                   style: TextStyle(
                     fontSize: 18,
                   ),
@@ -104,7 +107,8 @@ class HomeDrawer extends StatelessWidget {
                   color: Theme.of(context).accentColor,
                 ),
                 title: Text(
-                  'Log out',
+                  AppLocalizations.of(context)
+                      .translate('home_drawer', 'log_out'),
                   style: TextStyle(
                     fontSize: 18,
                   ),

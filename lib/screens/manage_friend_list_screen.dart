@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -32,13 +33,14 @@ class _ManageFriendListScreenState extends State<ManageFriendListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         iconTheme: IconThemeData(
+        iconTheme: IconThemeData(
           color: Theme.of(context).backgroundColor,
         ),
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Manage your friend list',
+          AppLocalizations.of(context)
+              .translate('manage_friend_list_screen', 'manage'),
           style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold),
@@ -67,14 +69,16 @@ class _ManageFriendListScreenState extends State<ManageFriendListScreen> {
                 children: <Widget>[
                   Container(
                     child: Text(
-                      'Looking for new people?',
+                      AppLocalizations.of(context)
+                          .translate('manage_friend_list_screen', 'looking'),
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                     margin: EdgeInsets.only(
-                      right: 10,
+                      right: 20,
                     ),
                   ),
                   RaisedButton.icon(
@@ -89,7 +93,10 @@ class _ManageFriendListScreenState extends State<ManageFriendListScreen> {
                     onPressed: () {
                       Navigator.of(context).pushNamed(UsersScreen.routeName);
                     },
-                    label: Text('Add a friend'),
+                    label: Text(
+                      AppLocalizations.of(context)
+                          .translate('manage_friend_list_screen', 'add'),
+                    ),
                   ),
                 ],
               ),
@@ -107,7 +114,8 @@ class _ManageFriendListScreenState extends State<ManageFriendListScreen> {
             ),
             Container(
               child: Text(
-                'List of your friends',
+                AppLocalizations.of(context)
+                    .translate('manage_friend_list_screen', 'list'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
@@ -122,10 +130,11 @@ class _ManageFriendListScreenState extends State<ManageFriendListScreen> {
                     valueColor: AlwaysStoppedAnimation<Color>(
                         Theme.of(context).backgroundColor),
                   )
-                : FriendsList(_user,true),
+                : FriendsList(_user, true),
             Container(
               child: Text(
-                'Friend invites',
+                AppLocalizations.of(context)
+                    .translate('manage_friend_list_screen', 'invites'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,

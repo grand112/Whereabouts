@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:Whereabouts/screens/profile_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -47,13 +48,13 @@ class _UsersScreenState extends State<UsersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         iconTheme: IconThemeData(
+        iconTheme: IconThemeData(
           color: Theme.of(context).backgroundColor,
         ),
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Add a new friend:',
+          AppLocalizations.of(context).translate('users_screen', 'add'),
           style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold),
@@ -164,7 +165,10 @@ class _UsersScreenState extends State<UsersScreen> {
                                     ),
                                   );
                                 },
-                                child: Text('Profile'),
+                                child: Text(
+                                  AppLocalizations.of(context)
+                                      .translate('users_screen', 'profile'),
+                                ),
                               ),
                               IconButton(
                                   icon: Icon(
@@ -174,47 +178,49 @@ class _UsersScreenState extends State<UsersScreen> {
                                   onPressed: () {
                                     _sendInvite(docs[index]['userId']);
                                     showDialog(
-                                        context: context,
-                                        child: new AlertDialog(
-                                          backgroundColor:
-                                              Theme.of(context).accentColor,
-                                          title: new Text(
-                                            "Invite has been sent",
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .backgroundColor),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                          content: Container(
-                                            height: 150,
-                                            child: Column(
-                                              children: <Widget>[
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                    bottom: 10,
-                                                  ),
-                                                  height: 70,
-                                                  decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/logo.png'),
-                                                        fit: BoxFit.contain),
-                                                  ),
+                                      context: context,
+                                      child: new AlertDialog(
+                                        backgroundColor:
+                                            Theme.of(context).accentColor,
+                                        title: new Text(
+                                          AppLocalizations.of(context)
+                                              .translate(
+                                                  'users_screen', 'invite'),
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .backgroundColor),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        content: Container(
+                                          height: 150,
+                                          child: Column(
+                                            children: <Widget>[
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                  bottom: 10,
                                                 ),
-                                                Center(
-                                                    child: RaisedButton(
-                                                  color: Theme.of(context)
-                                                      .backgroundColor,
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: Text('OK'),
-                                                )),
-                                              ],
-                                            ),
+                                                height: 70,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/logo.png'),
+                                                      fit: BoxFit.contain),
+                                                ),
+                                              ),
+                                              Center(
+                                                  child: RaisedButton(
+                                                color: Theme.of(context)
+                                                    .backgroundColor,
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text('OK'),
+                                              )),
+                                            ],
                                           ),
                                         ),
-                                      );
+                                      ),
+                                    );
                                   })
                             ],
                           );

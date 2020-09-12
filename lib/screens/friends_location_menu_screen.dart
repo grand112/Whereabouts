@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/add_track_place_screen.dart';
@@ -17,13 +18,14 @@ class _FriendsLocationMenuScreenState extends State<FriendsLocationMenuScreen> {
     final double heightOfScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-         iconTheme: IconThemeData(
+        iconTheme: IconThemeData(
           color: Theme.of(context).backgroundColor,
         ),
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Find your firends on a map',
+          AppLocalizations.of(context)
+              .translate('friends_location_menu_screen', 'findFriends'),
           style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold),
@@ -79,7 +81,8 @@ class _FriendsLocationMenuScreenState extends State<FriendsLocationMenuScreen> {
                           bottom: 10,
                         ),
                         child: Text(
-                          'Find your friends on a map',
+                          AppLocalizations.of(context).translate(
+                              'friends_location_menu_screen', 'findFriends'),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).backgroundColor,
@@ -126,7 +129,8 @@ class _FriendsLocationMenuScreenState extends State<FriendsLocationMenuScreen> {
                           bottom: 10,
                         ),
                         child: Text(
-                          'Monitor particular area and get notifications',
+                          AppLocalizations.of(context).translate(
+                              'friends_location_menu_screen', 'monitor'),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Theme.of(context).backgroundColor,

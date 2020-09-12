@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -83,7 +84,7 @@ class _ChatInfoState extends State<ChatInfo> {
         String time = DateFormat('HH:mm').format(dateTime);
         String from;
         if (docs.documents[0]['sentByUsername'] == userData['username']) {
-          from = 'you';
+          from = AppLocalizations.of(context).translate('chat_info', 'you');
         } else if (docs.documents[0]['sentByUsername'] !=
             userData['username']) {
           from = docs.documents[0]['sentByUsername'];
@@ -161,7 +162,7 @@ class _ChatInfoState extends State<ChatInfo> {
                   ),
                   Text(
                     _lastMessage == null && _from == null
-                        ? 'no previous messages'
+                        ? AppLocalizations.of(context).translate('chat_info', 'no_messages')
                         : _from + ': ' + _lastMessage,
                     style: TextStyle(color: Colors.grey),
                   )

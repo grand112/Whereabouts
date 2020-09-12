@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -111,7 +112,8 @@ class _GoogleAuthState extends State<GoogleAuth> {
                         ),
                       ),
                       Text(
-                        'Sign in with Google',
+                        AppLocalizations.of(context)
+                            .translate('auth_google', 'sign_up'),
                         style: TextStyle(
                           color: Colors.black,
                         ),

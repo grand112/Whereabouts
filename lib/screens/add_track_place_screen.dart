@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -117,7 +118,10 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
     if (_enteredTitle == null || _enteredTitle.length < 3) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
-          content: Text('Please provide a name of the place.'),
+          content: Text(
+            AppLocalizations.of(context)
+                .translate('add_track_place_screen', 'provideName'),
+          ),
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
@@ -125,7 +129,10 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
     } else if (_previewImageUrl == null) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
-          content: Text('Please pick a place to track.'),
+          content: Text(
+            AppLocalizations.of(context)
+                .translate('add_track_place_screen', 'pickPlaceTrack'),
+          ),
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
@@ -133,7 +140,10 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
     } else if (_pickedUsers.length == 0) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
-          content: Text('Please pick at least one friend to track.'),
+          content: Text(
+            AppLocalizations.of(context)
+                .translate('add_track_place_screen', 'pickFriend'),
+          ),
           backgroundColor: Theme.of(context).errorColor,
         ),
       );
@@ -178,7 +188,9 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                         bottom: 30,
                       ),
                       child: Text(
-                        'ADD PLACE TO TRACK',
+                        AppLocalizations.of(context)
+                            .translate('add_track_place_screen', 'addPlace'),
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -186,7 +198,8 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                       ),
                     ),
                     Text(
-                      'Provide custom name of the place',
+                      AppLocalizations.of(context).translate(
+                          'add_track_place_screen', 'provideCustomName'),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
@@ -203,7 +216,8 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                         autocorrect: true,
                         enableSuggestions: true,
                         decoration: InputDecoration(
-                          labelText: 'Add the name',
+                          labelText: AppLocalizations.of(context)
+                              .translate('add_track_place_screen', 'addName'),
                           labelStyle:
                               TextStyle(color: Theme.of(context).accentColor),
                         ),
@@ -220,7 +234,8 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'Pick the place on the map',
+                      AppLocalizations.of(context)
+                          .translate('add_track_place_screen', 'pickPlaceMap'),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
@@ -239,7 +254,10 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                         _pickOnMap();
                       },
                       icon: Icon(Icons.map),
-                      label: Text('Pick place'),
+                      label: Text(
+                        AppLocalizations.of(context)
+                            .translate('add_track_place_screen', 'pickPlace'),
+                      ),
                     ),
                     _previewImageUrl == null
                         ? Container()
@@ -265,7 +283,9 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                               Text(
                                 _radius == null
                                     ? ''
-                                    : 'Radius: ' +
+                                    : AppLocalizations.of(context).translate(
+                                            'add_track_place_screen',
+                                            'radius') +
                                         _round(_radius, 2).toString() +
                                         ' m',
                               ),
@@ -277,7 +297,9 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                     ),
                     SizedBox(height: 20),
                     Text(
-                      'Pick friends to be tracked in your place',
+                      AppLocalizations.of(context).translate(
+                          'add_track_place_screen', 'pickFriendTrack'),
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
@@ -338,7 +360,10 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                                             child: Column(
                                               children: [
                                                 Text(
-                                                  'You don\'t have any friends yet   :(\n\nTry to add some!',
+                                                  AppLocalizations.of(context)
+                                                      .translate(
+                                                          'add_track_place_screen',
+                                                          'noFriends'),
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 15,
@@ -367,7 +392,11 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                                                     },
                                                     icon: Icon(Icons.add),
                                                     label: Text(
-                                                      'Add friends',
+                                                      AppLocalizations.of(
+                                                              context)
+                                                          .translate(
+                                                              'add_track_place_screen',
+                                                              'addFriends'),
                                                       style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -450,7 +479,11 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                                                                   right: 15,
                                                                 ),
                                                                 child: Text(
-                                                                  'User has been added',
+                                                                  AppLocalizations.of(
+                                                                          context)
+                                                                      .translate(
+                                                                          'add_track_place_screen',
+                                                                          'userAdded'),
                                                                   style: TextStyle(
                                                                       color: Theme.of(
                                                                               context)
@@ -494,7 +527,10 @@ class _AddTrackPlaceScreenState extends State<AddTrackPlaceScreen> {
                         ? CircularProgressIndicator()
                         : RaisedButton(
                             onPressed: () => _validate(ctx),
-                            child: Text('ADD'),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('add_track_place_screen', 'add'),
+                            ),
                           ),
                     SizedBox(
                       height: 30,

@@ -1,13 +1,18 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
+
 import '../../screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SwipeImage extends StatelessWidget {
   final String image;
-  final String title;
-  final String content;
+  final int index;
   bool isLogin = true;
 
-  SwipeImage(this.image, this.title, this.content);
+  SwipeImage(
+    this.image,
+    this.index,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +32,15 @@ class SwipeImage extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top:50),
-              height: heightOfScreen*0.1,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(0, 0, 0, 0.7),
-                image: DecorationImage(
-                    image: AssetImage('assets/title_white.png'),
-                    fit: BoxFit.contain),
-              ),
+            margin: EdgeInsets.only(top: 50),
+            height: heightOfScreen * 0.1,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(0, 0, 0, 0.7),
+              image: DecorationImage(
+                  image: AssetImage('assets/title_white.png'),
+                  fit: BoxFit.contain),
             ),
-          
+          ),
           Container(
             height: isPortrait ? heightOfScreen * 0.32 : heightOfScreen * 0.52,
             margin: EdgeInsets.only(
@@ -49,7 +53,8 @@ class SwipeImage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   Text(
-                    title,
+                    AppLocalizations.of(context)
+                        .translate('welcome_screen', 'title$index'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 17,
@@ -63,7 +68,8 @@ class SwipeImage extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(horizontal: heightOfScreen * 0.05),
                     child: Text(
-                      content,
+                      AppLocalizations.of(context)
+                          .translate('welcome_screen', 'content$index'),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
@@ -89,7 +95,8 @@ class SwipeImage extends StatelessWidget {
                                 color: Colors.white,
                               ),
                               label: Text(
-                                'LOG IN',
+                                AppLocalizations.of(context)
+                                    .translate('welcome_screen', 'log_in'),
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -111,7 +118,8 @@ class SwipeImage extends StatelessWidget {
                                 color: Colors.white,
                               ),
                               label: Text(
-                                'CREATE\nAN ACCOUNT',
+                                AppLocalizations.of(context).translate(
+                                    'welcome_screen', 'create_account'),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 14,

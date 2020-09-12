@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -107,7 +108,8 @@ class _NewMessageState extends State<NewMessage> {
               enableSuggestions: true,
               controller: _controller,
               decoration: InputDecoration(
-                labelText: 'Send a message',
+                labelText: AppLocalizations.of(context)
+                    .translate('new_message', 'send_message'),
                 labelStyle: TextStyle(color: Theme.of(context).accentColor),
               ),
               onChanged: (value) {

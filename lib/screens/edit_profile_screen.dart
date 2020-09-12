@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -137,7 +138,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ],
               ),
               Text(
-                'Change your background image',
+                AppLocalizations.of(context)
+                    .translate('edit_profile_screen', 'changeBackground'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
@@ -161,12 +163,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     _pickedBackground = pickedImage;
                   });
                 },
-                label: Text('Image form gallery'),
+                label: Text(
+                  AppLocalizations.of(context)
+                      .translate('edit_profile_screen', 'gallery'),
+                ),
               ),
               SizedBox(
                 height: 10,
               ),
-              Text('OR'),
+              Text(
+                AppLocalizations.of(context)
+                    .translate('edit_profile_screen', 'or'),
+              ),
               SizedBox(
                 height: 10,
               ),
@@ -185,7 +193,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     _pickedBackground = pickedImage;
                   });
                 },
-                label: Text('Take a photo'),
+                label: Text(
+                  AppLocalizations.of(context)
+                      .translate('edit_profile_screen', 'photo'),
+                ),
               ),
               SizedBox(height: 10),
               Divider(
@@ -193,7 +204,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               SizedBox(height: 10),
               Text(
-                'Change your profile image',
+                AppLocalizations.of(context)
+                    .translate('edit_profile_screen', 'changeImage'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
@@ -247,12 +259,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 _pickedAvatar = pickedImage;
                               });
                             },
-                            label: Text('Image form gallery'),
+                            label: Text(
+                              AppLocalizations.of(context)
+                                  .translate('edit_profile_screen', 'gallery'),
+                            ),
                           ),
                           SizedBox(
                             height: 10,
                           ),
-                          Text('OR'),
+                          Text(
+                            AppLocalizations.of(context)
+                                .translate('edit_profile_screen', 'or'),
+                          ),
                           SizedBox(
                             height: 10,
                           ),
@@ -271,7 +289,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 _pickedAvatar = pickedImage;
                               });
                             },
-                            label: Text('Take a photo'),
+                            label: Text(
+                              AppLocalizations.of(context)
+                                  .translate('edit_profile_screen', 'photo'),
+                            ),
                           ),
                         ],
                       ),
@@ -285,7 +306,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               SizedBox(height: 10),
               Text(
-                'Change your username',
+                AppLocalizations.of(context)
+                    .translate('edit_profile_screen', 'changeUsername'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
@@ -317,7 +339,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               SizedBox(height: 10),
               Text(
-                'Provide your hobby or proffesion',
+                AppLocalizations.of(context)
+                    .translate('edit_profile_screen', 'changeHobby'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
@@ -345,7 +368,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               SizedBox(height: 20),
               Text(
-                'Say something about you:',
+                AppLocalizations.of(context)
+                    .translate('edit_profile_screen', 'about'),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 17,
@@ -366,7 +390,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   enableSuggestions: true,
                   maxLength: 300,
                   decoration: InputDecoration(
-                    labelText: 'About you',
+                    labelText: AppLocalizations.of(context)
+                        .translate('edit_profile_screen', 'aboutYou'),
                     labelStyle: TextStyle(color: Theme.of(context).accentColor),
                   ),
                   onChanged: (value) {
@@ -383,7 +408,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       onPressed: () {
                         _sendData();
                       },
-                      child: Text('Save changes'),
+                      child: Text(
+                        AppLocalizations.of(context)
+                            .translate('edit_profile_screen', 'save'),
+                      ),
                     ),
               SizedBox(
                 height: 30,

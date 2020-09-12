@@ -1,0 +1,189 @@
+{
+    "welcome_screen": {
+        "title0": "Czym jest aplikacja Whereabouts?",
+        "content0": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+        "title1": "Odkrywaj",
+        "content1": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+        "title2": "Dbaj o bezpieczeństwo swojej rodziny",
+        "content2": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+        "title3": "Pozostań w kontakcie ze znajomymi",
+        "content3": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+        "log_in": "ZALOGUJ SIĘ",
+        "create_account": "ZAREJESTRUJ SIĘ"
+    },
+    "auth_form": {
+        "pick_image_error": "Wybierz zdjęcie profilowe. Jeśli nie chcesz dodawać własnego zdjęcia, wybierz domyślne.",
+        "log_in": "ZALOGUJ SIĘ",
+        "sign_up": "ZAREJESTRUJ SIĘ",
+        "or": "LUB",
+        "please_enter_email": "Wprowadzony adres email jest nie poprawny.",
+        "email_address": "Adres Email",
+        "enter_characters": "Proszę wprowadź przynajmniej 4 znaki",
+        "username": "Nazwa użytkownika",
+        "password": "Hasło",
+        "password_length": "Hasło musi zawierać przynajmniej 7 znaków",
+        "password_space": "Hasło nie może zawierać spacji",
+        "password_length_space": "Hasło musi zawierać przynajmniej 7 znaków i nie może zawierać spacji",
+        "dont_have_account": "Nie masz konta?",
+        "have_account": "Masz już konto?",
+        "create_account": "Stwórz konto",
+        "log_in_now": "Zaloguj się teraz"
+    },
+    "auth_google": {
+        "sign_up": "Zaloguj się z Google"
+    },
+    "chat_info": {
+        "you": "Ty",
+        "no_messages": "Brak poprzednich wiadomości"
+    },
+    "new_message": {
+        "send_message": "Wyślij wiadomość"
+    },
+    "select_chat_screen": {
+        "chats": "Czaty"
+    },
+    "home_drawer": {
+        "settings": "Ustawienia",
+        "edit_profile": "Edytuj profil",
+        "log_out": "Wyloguj się"
+    },
+    "user_image_picker": {
+        "choose_image": "Wybierz zdjęcie profilowe:",
+        "camera": "Kamera",
+        "gallery": "Galeria",
+        "or": "LUB",
+        "default": "Domyślne",
+        "choose_profile_image": "Wybierz zdjęcie\nprofilowe"
+    },
+    "places": {
+        "discovered_by": "Odkryte przez : ",
+        "details": "Szczegóły"
+    },
+    "add_place_screen": {
+        "provide_photo": "Proszę dodaj zdjęcia miejsca.",
+        "provide_location": "Proszę podaj lokalizację miejsca",
+        "provide_name": "Proszę podaj nazwę miejsca",
+        "add_place": "DODAJ MIEJSCE",
+        "provide_photo_place": "Dodaj zdjęcie miejsca",
+        "take_photo": "Zrób zdjęcie",
+        "or": "LUB",
+        "pick_photo": "Wybierz zdjęcie z galerii",
+        "provide_location_place": "Podaj lokalizację miejsca",
+        "current_location": " Użyj obecnej lokalizacji",
+        "select_location": "Wybierz lokalizację na mapie",
+        "add_name": "Dodaj nazwę miejsca",
+        "description": "Opis miejsca",
+        "add": "DODAJ"
+    },
+    "places_list_screen": {
+        "discovered": "Odkryte miejsca",
+        "by_you": "Miesjca odkryte przez Ciebie",
+        "empty_you": "Trochę tu pusto  :(\n\nDodaj trochę miejsc aby się nimi podzielić",
+        "add": "Dodaj nowe miejsce",
+        "by_friends": "Miejsca odkryte przez Twoich znajomych",
+        "empty_friends": "Twoi znajom nie dodali jeszcze żadnych miejsc.\n\nZachęć ich do dodania kilku :)",
+        "send": "Wyślij wiadomość"
+    },
+    "place_details_screen": {
+        "location": "Lokalizacja: ",
+        "discovered_by": "Odkryte przez: "
+    },
+    "add_track_place_screen": {
+        "provideName": "Podaj nazwę miejsca.",
+        "pickPlaceTrack": "Wybierz miejsce, które chcesz obserwować.",
+        "pickFriend": "Wybierz przynajmniej jednego znajomego do obserwowania.",
+        "addPlace": "DODAJ MIEJSCE, KTORE CHESZ OBSERWOWAĆ",
+        "provideCustomName": "Podaj własną nazwę miejsca",
+        "addName": "Dodaj nazwę",
+        "pickPlaceMap": "Wybierz miejsce na mapie",
+        "pickPlace": "Wybierz miejsce",
+        "radius": "Promień: ",
+        "pickFriendTrack": "Wybierz znajomych do śledzenia w Twoim miejscu",
+        "noFriends": "Nie masz jeszcze żadnych znajomych   :(\n\nSpróbuj dodać kilku!",
+        "addFriends": "Dodaj znajomych",
+        "userAdded": "Użytkownik został dodany",
+        "add": "DODAJ"
+    },
+    "auth_screen": {
+        "error": "Wystąpił błąd, sprawdź wprowadzane dane"
+    },
+    "control_screen": {
+        "notConnected": "Aplikacja nie ma połączenia z Internetem",
+        "withoutConnection": "Bez połączenia internetowego, nie jesteśmy w stanie zapewnić Ci w pełni działającej aplikacji.\nPołącz się z interentem, aby otrzymać dostęp do wszystkich funkcjonalności.",
+        "home": "Profil",
+        "messages": "Wiadomości",
+        "friends": "Znajomi",
+        "places": "Miejsca"
+    },
+    "edit_profile_screen": {
+        "changeBackground": "Zmień zdjęcie w tle",
+        "gallery": "Zdjęcie z galerii",
+        "or": "LUB",
+        "photo": "Zrób zdjęcie",
+        "changeImage": "Zmień swoje zdjęcie profilowe",
+        "changeUsername": "Zmień nazwę użytkownika",
+        "changeHobby": "Podaj swoje hobby lub zawód",
+        "about": "Powiedz coś o sobie:",
+        "aboutYou": "O Tobie",
+        "save": "Zapisz zmiany"
+    },
+    "friends_location_menu_screen": {
+        "findFriends": "Znajdź znajomych na mapie",
+        "monitor": "Monitoruj wybrany obszar i otrzymuj powiadomienia"
+    },
+    "friends_location_screen": {
+        "placeAdded": "To jest miejsce które zostało dodane do śledzenia:",
+        "you": "Ty",
+        "profile": "Profil",
+        "locationFriends": "Aktualna lokalizacja Twoich\nznajomcyh"
+    },
+    "friends_screen": {
+        "stay": "Pozostań w kontakcie ze znajomymi",
+        "track": "Obserwuj lokalizację znajomych na mapie",
+        "manage": "Zarządzaj listą znajomych"
+    },
+    "manage_friend_list_screen": {
+        "manage": "Zarządzaj listą znajomych",
+        "looking": "Szukasz nowych\nkontaktów?",
+        "add": "Dodaj znajomego",
+        "list": "Lista Twoich znajomych",
+        "invites": "Zaproszenia do znajomych"
+    },
+    "permission_screen": {
+        "without": "Bez Twojego pozwolenia na pobieranie lokalizacji aplikacja nie jest w stanie działać poprawnie. Rozważ udzielenie pozwolenia, aby otrzymać dostęp do aplikacji.",
+        "grant": "Przyznaj pozwolenie",
+        "logOut": "Wyloguj"
+    },
+    "pick_circle_screen": {
+        "choosePlaces": "Wybierz miejsca, które\nchcesz obserwować",
+        "radius": "Zmień promień"
+    },
+    "pick_on_map_screen": {
+        "select": "Wybierz miejsce na mapie"
+    },
+    "profile_screen": {
+        "invite": "Zaproszenie zostało wysłane",
+        "add": "Dodaj do znajomych",
+        "removed": "Użytkownik został usunięty z listy znajomych",
+        "remove": "Usuń znajomego",
+        "send": "Wyślij wiadomość",
+        "hobby": "Hobby/Zawód",
+        "noDescription": "Ten użytkownik nie podał jeszcze informacji o sobie",
+        "friends": "ZNAJOMI",
+        "tracked": "OBSERWOWANE MIEJSCA",
+        "discovered": "ODKRYTE MIEJSCA"
+    },
+    "users_screen": {
+        "add": "Dodaj nowego znajomego",
+        "profile": "Profil",
+        "invite": "Zaproszenie zostało wysłane"
+    },
+    "home_screen": {
+        "edit": "Edytuj profil",
+        "hobby": "Hobby/Zawód",
+        "noDescription": "Ten użytkownik nie podał jeszcze informacji o sobie",
+        "friends": "ZNAJOMI",
+        "tracked": "OBSERWOWANE MIEJSCA",
+        "discovered": "ODKRYTE MIEJSCA"
+    }
+}

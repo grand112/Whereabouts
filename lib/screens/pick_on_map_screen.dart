@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -41,17 +42,21 @@ class _PickOnMapScreenState extends State<PickOnMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-        title: Text('Select place on map'),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          AppLocalizations.of(context)
+              .translate('pick_on_map_screen', 'select'),
+        ),
         actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.check),
-              onPressed: _pickedLocation == null
-                  ? null
-                  : () {
-                      Navigator.of(context).pop(_pickedLocation);
-                    },
-            ),
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: _pickedLocation == null
+                ? null
+                : () {
+                    Navigator.of(context).pop(_pickedLocation);
+                  },
+          ),
         ],
       ),
       body: _initialCameraPosition == null
@@ -65,13 +70,13 @@ class _PickOnMapScreenState extends State<PickOnMapScreen> {
               initialCameraPosition: _initialCameraPosition,
               onTap: _selectOnMap,
               markers: _pickedLocation == null
-            ? null
-            : {
-                Marker(
-                  markerId: MarkerId('m1'),
-                  position: _pickedLocation,
-                ),
-              },
+                  ? null
+                  : {
+                      Marker(
+                        markerId: MarkerId('m1'),
+                        position: _pickedLocation,
+                      ),
+                    },
             ),
     );
   }

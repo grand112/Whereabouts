@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:Whereabouts/screens/add_place_screen.dart';
 import 'package:Whereabouts/screens/friends_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,10 +38,12 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         brightness: Brightness.dark,
         backgroundColor: Theme.of(context).accentColor,
         title: Text(
-          'Great places',
+          AppLocalizations.of(context)
+              .translate('places_list_screen', 'discovered'),
           style: TextStyle(
               color: Theme.of(context).backgroundColor,
               fontWeight: FontWeight.bold),
@@ -79,7 +82,8 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                     bottom: 10,
                   ),
                   child: Text(
-                    'Places discovered by you',
+                    AppLocalizations.of(context)
+                        .translate('places_list_screen', 'by_you'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -128,7 +132,8 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        'A bit empty here  :(\n\nAdd some places to share',
+                                        AppLocalizations.of(context).translate(
+                                            'places_list_screen', 'empty_you'),
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15,
@@ -154,7 +159,9 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                                           },
                                           icon: Icon(Icons.add),
                                           label: Text(
-                                            'Add new place',
+                                            AppLocalizations.of(context)
+                                                .translate('places_list_screen',
+                                                    'add'),
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -192,7 +199,8 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                     bottom: 10,
                   ),
                   child: Text(
-                    'Places discovered by your friends',
+                    AppLocalizations.of(context)
+                        .translate('places_list_screen', 'by_friends'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -227,7 +235,8 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  'Your friends have no places to share yet.\n\nEncourage them to add some :)',
+                                  AppLocalizations.of(context).translate(
+                                      'places_list_screen', 'empty_friends'),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
@@ -251,7 +260,8 @@ class _PlacesListScreenState extends State<PlacesListScreen> {
                                     },
                                     icon: Icon(Icons.chat),
                                     label: Text(
-                                      'Send a message',
+                                      AppLocalizations.of(context).translate(
+                                          'places_list_screen', 'send'),
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),

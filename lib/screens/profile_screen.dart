@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -281,7 +282,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               backgroundColor:
                                                   Theme.of(context).accentColor,
                                               title: new Text(
-                                                "Invite has been sent",
+                                                AppLocalizations.of(context)
+                                                    .translate('profile_screen',
+                                                        'invite'),
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .backgroundColor),
@@ -320,7 +323,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ),
                                           );
                                         },
-                                        label: Text('Add to friends'),
+                                        label: Text(
+                                          AppLocalizations.of(context)
+                                              .translate(
+                                                  'profile_screen', 'add'),
+                                        ),
                                       )
                                     : RaisedButton.icon(
                                         icon: Icon(
@@ -340,7 +347,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               backgroundColor:
                                                   Theme.of(context).accentColor,
                                               title: new Text(
-                                                "User has been removed from your friend list",
+                                                AppLocalizations.of(context)
+                                                    .translate('profile_screen',
+                                                        'removed'),
                                                 style: TextStyle(
                                                     color: Theme.of(context)
                                                         .backgroundColor),
@@ -379,7 +388,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ),
                                           );
                                         },
-                                        label: Text('Remove friend'),
+                                        label: Text(
+                                          AppLocalizations.of(context)
+                                              .translate(
+                                                  'profile_screen', 'remove'),
+                                        ),
                                       ),
                                 _isFriend
                                     ? RaisedButton.icon(
@@ -405,7 +418,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           size: 20,
                                         ),
                                         label: Text(
-                                          'Send a message',
+                                          AppLocalizations.of(context)
+                                              .translate(
+                                                  'profile_screen', 'send'),
                                         ),
                                       )
                                     : Container(),
@@ -427,7 +442,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           margin: EdgeInsets.only(bottom: 10),
                           child: Text(
                             futureSnapshot.data['hobby'] == null
-                                ? 'Hobby/Proffesion'
+                                ? AppLocalizations.of(context)
+                                    .translate('profile_screen', 'hobby')
                                 : futureSnapshot.data['hobby'],
                             style: TextStyle(
                               fontSize: 15,
@@ -439,7 +455,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           margin: EdgeInsets.only(bottom: 5),
                           child: Text(
                             futureSnapshot.data['about'] == null
-                                ? 'This user hasn\'t provided their profile description yet'
+                                ? AppLocalizations.of(context).translate(
+                                    'profile_screen', 'noDescription')
                                 : futureSnapshot.data['about'],
                             style: TextStyle(
                               fontSize: 15,
@@ -457,7 +474,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    'FRIENDS',
+                                    AppLocalizations.of(context)
+                                        .translate('profile_screen', 'friends'),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[400],
@@ -477,7 +495,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    'TRACKED PLACES',
+                                    AppLocalizations.of(context)
+                                        .translate('profile_screen', 'tracked'),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[400],
@@ -497,7 +516,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Column(
                                 children: <Widget>[
                                   Text(
-                                    'DISCOVERED PLACES',
+                                    AppLocalizations.of(context).translate(
+                                        'profile_screen', 'discovered'),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Colors.grey[400],
