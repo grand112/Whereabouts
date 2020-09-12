@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -96,10 +97,10 @@ class _RequestsState extends State<Requests> {
             return docs.length == 0
                 ? Container(
                     child: Text(
-                      'You don\'t have any pending friend invites',
+                      AppLocalizations.of(context)
+                          .translate('requests', 'noRequests'),
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                     margin: EdgeInsets.all(25),
                   )
@@ -164,7 +165,10 @@ class _RequestsState extends State<Requests> {
                                       ),
                                     );
                                   },
-                                  child: Text('Profile'),
+                                  child: Text(
+                                    AppLocalizations.of(context)
+                                        .translate('requests', 'profile'),
+                                  ),
                                 ),
                                 Container(
                                   margin: EdgeInsets.only(

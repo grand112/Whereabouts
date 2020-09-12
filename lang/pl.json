@@ -185,5 +185,15 @@
         "friends": "ZNAJOMI",
         "tracked": "OBSERWOWANE MIEJSCA",
         "discovered": "ODKRYTE MIEJSCA"
+    },
+    "friends_list": {
+        "noFriends": "Nie masz jeszcze żadnych znajomych   :(\n\nSpróbuj dodać kilku!",
+        "noChat": "Nie masz znajomych, z którymi możesz czatować   :(\n\nSpróbuj dodać kilku!",
+        "add": "Dodaj znajomego",
+        "profile": "Profil"
+    },
+    "requests": {
+        "noRequests": "Nie masz żadnych oczekujących zaproszeń do znajomych",
+        "profile": "Profil"
     }
 }

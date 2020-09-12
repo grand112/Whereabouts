@@ -185,5 +185,15 @@
     "friends": "FRIENDS",
     "tracked": "TRACKED PLACES",
     "discovered": "DISCOVERED PLACES"
+  },
+  "friends_list": {
+    "noFriends": "You don't have any friends yet   :(\n\nTry to add some!",
+    "noChat": "You don't have any friends to chat with   :(\n\nTry to add some!",
+    "add": "Add a friend",
+    "profile": "Profile"
+  },
+  "requests": {
+    "noRequests": "You don't have any pending friend invites",
+    "profile": "Profile"
   }
 }

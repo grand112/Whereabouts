@@ -1,3 +1,4 @@
+import 'package:Whereabouts/helpers/app_localizations.dart';
 import 'package:Whereabouts/widgets/chat/chat_info.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -67,8 +68,10 @@ class _FriendsListState extends State<FriendsList> {
                         Container(
                           child: Text(
                             widget.profile
-                                ? 'You don\'t have any friends yet   :(\n\nTry to add some!'
-                                : 'You don\'t have any friends to chat with   :(\n\nTry to add some!',
+                                ? AppLocalizations.of(context)
+                                    .translate('friends_list', 'noFriends')
+                                : AppLocalizations.of(context)
+                                    .translate('friends_list', 'noChat'),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -95,7 +98,8 @@ class _FriendsListState extends State<FriendsList> {
                             Navigator.of(context)
                                 .pushNamed(UsersScreen.routeName);
                           },
-                          label: Text('Add a friend'),
+                          label: Text(AppLocalizations.of(context)
+                              .translate('friends_list', 'add')),
                         ),
                       ],
                     )
@@ -169,7 +173,11 @@ class _FriendsListState extends State<FriendsList> {
                                               ),
                                             );
                                           },
-                                          child: Text('Profile'),
+                                          child: Text(
+                                            AppLocalizations.of(context)
+                                                .translate(
+                                                    'friends_list', 'profile'),
+                                          ),
                                         ),
                                       ),
                                     ],

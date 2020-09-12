@@ -396,8 +396,10 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                         ? CircularProgressIndicator()
                         : RaisedButton(
                             onPressed: () => _validate(ctx),
-                            child: Text(AppLocalizations.of(context)
-                                .translate('add_place_screen', 'add')),
+                            child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('add_place_screen', 'add'),
+                            ),
                           )
                   ],
                 ),
