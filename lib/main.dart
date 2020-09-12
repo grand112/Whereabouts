@@ -1,4 +1,5 @@
 import 'package:Whereabouts/helpers/app_localizations.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -39,6 +40,33 @@ class Whereabouts extends StatefulWidget {
 
 class _WhereaboutsState extends State<Whereabouts> {
   Locale _locale;
+
+  @override
+  void initState() {
+    super.initState();
+    getSettings();
+  }
+
+  Future<void> getSettings() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    if (user != null) {
+      DocumentSnapshot settings = await Firestore.instance
+          .collection('users')
+          .document(user.uid)
+          .collection('settings')
+          .document(user.uid)
+          .get();
+      Locale prefferedLocale;
+      if (settings['language'] == 'pl') {
+        prefferedLocale = Locale('pl', 'PL');
+      } else if (settings['language'] == 'en') {
+        prefferedLocale = Locale('en', 'US');
+      }
+      setState(() {
+        _locale = prefferedLocale;
+      });
+    }
+  }
 
   changeLanguage(Locale locale) {
     setState(() {

@@ -57,7 +57,8 @@
   },
   "places": {
     "discovered_by": "Discovered by : ",
-    "details": "Details"
+    "details": "Details",
+    "swipe": "Swipe to delete"
   },
   "add_place_screen": {
     "provide_photo": "Please provide a photo of the place.",
@@ -195,5 +196,9 @@
   "requests": {
     "noRequests": "You don't have any pending friend invites",
     "profile": "Profile"
+  },
+  "settings_screen": {
+    "settings": "Settings",
+    "change": "Change language:"
   }
 }

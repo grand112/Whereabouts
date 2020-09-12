@@ -57,7 +57,8 @@
     },
     "places": {
         "discovered_by": "Odkryte przez : ",
-        "details": "Szczegóły"
+        "details": "Szczegóły",
+        "swipe": "Przecignij aby usunąć"
     },
     "add_place_screen": {
         "provide_photo": "Proszę dodaj zdjęcia miejsca.",
@@ -195,5 +196,9 @@
     "requests": {
         "noRequests": "Nie masz żadnych oczekujących zaproszeń do znajomych",
         "profile": "Profil"
+    },
+    "settings_screen": {
+        "settings": "Ustawienia",
+        "change": "Zmień język:"
     }
 }
