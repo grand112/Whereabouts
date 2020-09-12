@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
+import './screens/settings_screen.dart';
 import './screens/friends_location_menu_screen.dart';
 import './screens/manage_friend_list_screen.dart';
 import './screens/loading_screen.dart';
@@ -23,7 +24,28 @@ void main() {
   runApp(Whereabouts());
 }
 
-class Whereabouts extends StatelessWidget {
+class Whereabouts extends StatefulWidget {
+  Whereabouts({Key key}) : super(key: key);
+
+  static void setLocale(BuildContext context, Locale newLocale) async {
+    _WhereaboutsState state =
+        context.findAncestorStateOfType<_WhereaboutsState>();
+    state.changeLanguage(newLocale);
+  }
+
+  @override
+  _WhereaboutsState createState() => _WhereaboutsState();
+}
+
+class _WhereaboutsState extends State<Whereabouts> {
+  Locale _locale;
+
+  changeLanguage(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,6 +63,7 @@ class Whereabouts extends StatelessWidget {
         Locale('en', 'US'),
         Locale('pl', 'PL'),
       ],
+      locale: _locale,
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -85,6 +108,7 @@ class Whereabouts extends StatelessWidget {
         ManageFriendListScreen.routeName: (ctx) => ManageFriendListScreen(),
         FriendsLocationMenuScreen.routeName: (ctx) =>
             FriendsLocationMenuScreen(),
+        SettingsScreen.routeName: (ctx) => SettingsScreen(),
       },
     );
   }

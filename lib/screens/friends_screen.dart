@@ -4,12 +4,7 @@ import 'package:flutter/material.dart';
 import '../screens/friends_location_menu_screen.dart';
 import '../screens/manage_friend_list_screen.dart';
 
-class FriendsScreen extends StatefulWidget {
-  @override
-  _FriendsScreenState createState() => _FriendsScreenState();
-}
-
-class _FriendsScreenState extends State<FriendsScreen> {
+class FriendsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double heightOfScreen = MediaQuery.of(context).size.height;

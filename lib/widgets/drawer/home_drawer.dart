@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../screens/settings_screen.dart';
 import '../../screens/welcome_screen.dart';
 import '../../screens/edit_profile_screen.dart';
 
@@ -52,7 +53,7 @@ class HomeDrawer extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  //...
+                  Navigator.of(context).pushNamed(SettingsScreen.routeName);
                 },
               ),
             ),

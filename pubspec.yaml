@@ -84,6 +84,8 @@ flutter:
     - assets/map.png
     - assets/map_marker.png
     - assets/circle.png
+    - assets/eng_flag.png
+    - assets/pl_flag.png
     - lang/en.json
     - lang/pl.json
 

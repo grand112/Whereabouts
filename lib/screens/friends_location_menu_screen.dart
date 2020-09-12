@@ -4,15 +4,9 @@ import 'package:flutter/material.dart';
 import '../screens/add_track_place_screen.dart';
 import '../screens/friends_location_screen.dart';
 
-class FriendsLocationMenuScreen extends StatefulWidget {
+class FriendsLocationMenuScreen extends StatelessWidget {
   static const routeName = '/friends-location-menu-screen';
 
-  @override
-  _FriendsLocationMenuScreenState createState() =>
-      _FriendsLocationMenuScreenState();
-}
-
-class _FriendsLocationMenuScreenState extends State<FriendsLocationMenuScreen> {
   @override
   Widget build(BuildContext context) {
     final double heightOfScreen = MediaQuery.of(context).size.height;
