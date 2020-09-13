@@ -136,7 +136,8 @@
     "placeAdded": "This is the place which you added to track:",
     "you": "You",
     "profile": "Profile",
-    "locationFriends": "Current location of your friends"
+    "locationFriends": "Current location of\nyour friends",
+    "distance": "Distance to\nyou:"
   },
   "friends_screen": {
     "stay": "Stay in touch with your friends",

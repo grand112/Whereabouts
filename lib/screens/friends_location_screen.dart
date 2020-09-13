@@ -210,6 +210,7 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
         //only friends are visible on map
         if (isFriend.data != null ||
             element.document.data['userId'] == _user.uid) {
+          double distance;
           DocumentSnapshot userData = await Firestore.instance
               .collection('users')
               .document(element.document.data['userId'])
@@ -220,6 +221,8 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
           var latitudeChange = element.document.data['latitude'];
           print(
               'change has been made by: $userMarkerId longitude: $longitudeChange latitude: $latitudeChange');
+
+          //if marker is your set it to red otherwise set it to orange fetch your location to calculate distance between markers
           if (_user.uid == element.document.data['userId']) {
             ByteData byteData = await DefaultAssetBundle.of(context)
                 .load("assets/arrow_you.png");
@@ -228,6 +231,15 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
             ByteData byteData =
                 await DefaultAssetBundle.of(context).load("assets/arrow.png");
             _imageData = byteData.buffer.asUint8List();
+            DocumentSnapshot myCurrentData = await Firestore.instance
+                .collection('locations')
+                .document(_user.uid)
+                .get();
+            distance = await Geolocator().distanceBetween(
+                element.document.data['latitude'],
+                element.document.data['longitude'],
+                myCurrentData['latitude'],
+                myCurrentData['longitude']);
           }
           LatLng latLng = LatLng(
             element.document.data['latitude'],
@@ -252,7 +264,7 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
                       context: context,
                       builder: (BuildContext context) {
                         return Container(
-                          height: 100,
+                          height: 120,
                           child: Card(
                             margin: EdgeInsets.zero,
                             color: Theme.of(context).accentColor,
@@ -264,93 +276,165 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
                             ),
                             child: Row(
                               children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(
-                                    left: 15,
-                                    right: 25,
-                                  ),
-                                  child: ClipOval(
-                                    child: Container(
-                                      color: Theme.of(context).backgroundColor,
-                                      child: CachedNetworkImage(
-                                        fit: BoxFit.cover,
-                                        height: 50,
-                                        width: 50,
-                                        imageUrl: userData['image_url'],
-                                        placeholder: (context, url) =>
-                                            CircularProgressIndicator(),
-                                        errorWidget: (context, url, error) =>
-                                            Icon(Icons.error),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        left: 15,
+                                        right: 25,
                                       ),
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  element.document.data['userId'] == _user.uid
-                                      ? AppLocalizations.of(context).translate(
-                                          'friends_location_screen', 'you')
-                                      : element.document.data['userName'],
-                                  style: TextStyle(
-                                    color: Theme.of(context).backgroundColor,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                element.document.data['userId'] == _user.uid
-                                    ? Container()
-                                    : IconButton(
-                                        icon: Icon(
-                                          Icons.message,
+                                      child: ClipOval(
+                                        child: Container(
                                           color:
                                               Theme.of(context).backgroundColor,
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            height: 50,
+                                            width: 50,
+                                            imageUrl: userData['image_url'],
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Icon(Icons.error),
+                                          ),
                                         ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => ChatScreen(
-                                                element.document.data['userId'],
-                                                _user,
-                                              ),
-                                            ),
-                                          );
-                                        },
                                       ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        bottom: 10,
+                                      ),
+                                      child: Text(
+                                        element.document.data['userId'] ==
+                                                _user.uid
+                                            ? AppLocalizations.of(context)
+                                                .translate(
+                                                    'friends_location_screen',
+                                                    'you')
+                                            : element.document.data['userName'],
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color:
+                                              Theme.of(context).backgroundColor,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        element.document.data['userId'] ==
+                                                _user.uid
+                                            ? Container()
+                                            : Container(
+                                                height: 30,
+                                                width: 80,
+                                                margin: EdgeInsets.only(
+                                                  left: 5,
+                                                ),
+                                                child: RaisedButton(
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                      Radius.circular(20),
+                                                    ),
+                                                  ),
+                                                  color: Theme.of(context)
+                                                      .backgroundColor,
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            ProfileScreen(
+                                                          element.document
+                                                              .data['userId'],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    AppLocalizations.of(context)
+                                                        .translate(
+                                                            'friends_location_screen',
+                                                            'profile'),
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                        element.document.data['userId'] ==
+                                                _user.uid
+                                            ? Container()
+                                            : IconButton(
+                                                icon: Icon(
+                                                  Icons.message,
+                                                  color: Theme.of(context)
+                                                      .backgroundColor,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ChatScreen(
+                                                        element.document
+                                                            .data['userId'],
+                                                        _user,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                                 element.document.data['userId'] == _user.uid
                                     ? Container()
                                     : Container(
                                         margin: EdgeInsets.only(
-                                          left: 5,
+                                          left: 30,
+                                          top: 25,
+                                          bottom: 15,
+                                          right: 10,
                                         ),
-                                        child: RaisedButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(20),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              AppLocalizations.of(context)
+                                                  .translate(
+                                                      'friends_location_screen',
+                                                      'distance'),
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .backgroundColor,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                          color:
-                                              Theme.of(context).backgroundColor,
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProfileScreen(
-                                                  element
-                                                      .document.data['userId'],
+                                            Container(
+                                              margin: EdgeInsets.only(
+                                                top: 10,
+                                              ),
+                                              child: Text(
+                                                distance.toStringAsFixed(0) +
+                                                    ' m',
+                                                style: TextStyle(
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                            );
-                                          },
-                                          child: Text(
-                                            AppLocalizations.of(context)
-                                                .translate(
-                                                    'friends_location_screen',
-                                                    'profile'),
-                                            style: TextStyle(
-                                              color: Colors.black,
                                             ),
-                                          ),
+                                          ],
                                         ),
                                       ),
                               ],

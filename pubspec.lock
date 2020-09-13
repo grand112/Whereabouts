@@ -126,7 +126,7 @@ packages:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "1.2.5"
   fake_async:
     dependency: transitive
     description:
@@ -370,7 +370,7 @@ packages:
       name: location_permissions
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.0+1"
   matcher:
     dependency: transitive
     description:

@@ -136,7 +136,8 @@
         "placeAdded": "To jest miejsce które zostało dodane do śledzenia:",
         "you": "Ty",
         "profile": "Profil",
-        "locationFriends": "Aktualna lokalizacja Twoich\nznajomcyh"
+        "locationFriends": "Aktualna lokalizacja Twoich\nznajomcyh",
+        "distance": "Odległość od\nCiebie:"
     },
     "friends_screen": {
         "stay": "Pozostań w kontakcie ze znajomymi",
