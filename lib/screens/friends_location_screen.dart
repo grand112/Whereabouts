@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:Whereabouts/helpers/app_localizations.dart';
+import 'package:Whereabouts/helpers/location_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:search_map_place/search_map_place.dart';
 
 import './chat_screen.dart';
 import './profile_screen.dart';
@@ -21,6 +23,7 @@ class FriendsLocationScreen extends StatefulWidget {
 }
 
 class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
+  Completer<GoogleMapController> _controller = Completer();
   StreamSubscription<QuerySnapshot> _dataStream;
   Position _currentPosition;
   Firestore firestore = Firestore.instance;
@@ -42,15 +45,16 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
   Future<void> _getCurrentPosition() async {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    setState(() {
-      _currentPosition = position;
-    });
 
-    _currentCameraPosition = CameraPosition(
+    CameraPosition currentCameraPosition = CameraPosition(
       target: LatLng(position.latitude, position.longitude),
       tilt: 0,
       zoom: 16,
     );
+    setState(() {
+      _currentCameraPosition = currentCameraPosition;
+      _currentPosition = position;
+    });
   }
 
   Future<void> _getCircles() async {
@@ -472,59 +476,87 @@ class _FriendsLocationScreenState extends State<FriendsLocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).backgroundColor,
+        ),
+        brightness: Brightness.dark,
+        backgroundColor: Theme.of(context).accentColor,
+        title: Text(
+          AppLocalizations.of(context)
+              .translate('friends_location_screen', 'locationFriends'),
+          style: TextStyle(
             color: Theme.of(context).backgroundColor,
-          ),
-          brightness: Brightness.dark,
-          backgroundColor: Theme.of(context).accentColor,
-          title: Text(
-            AppLocalizations.of(context)
-                .translate('friends_location_screen', 'locationFriends'),
-            style: TextStyle(
-              color: Theme.of(context).backgroundColor,
-              fontWeight: FontWeight.bold,
-            ),
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: _currentPosition == null || _currentCameraPosition == null
-            ? Container(
-                color: Theme.of(context).accentColor,
-                height: double.infinity,
-                width: double.infinity,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).backgroundColor),
+      ),
+      body: _currentPosition == null || _currentCameraPosition == null
+          ? Container(
+              color: Theme.of(context).accentColor,
+              height: double.infinity,
+              width: double.infinity,
+              child: Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).backgroundColor),
+                ),
+              ),
+            )
+          : Stack(
+              children: [
+                GoogleMap(
+                  mapType: _changeMap ? MapType.normal : MapType.hybrid,
+                  initialCameraPosition: _currentCameraPosition,
+                  markers: _markers == null ? [] : _markers,
+                  circles: _circles == null ? [] : _circles,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                ),
+                Positioned(
+                  top: 90,
+                  right: MediaQuery.of(context).size.width * 0.05,
+                  child: Container(
+                    color: Theme.of(context).accentColor,
+                    padding: EdgeInsets.only(bottom: 5, right: 5),
+                    child: IconButton(
+                        icon: Icon(Icons.map,
+                            size: 40, color: Theme.of(context).backgroundColor),
+                        onPressed: () {
+                          setState(() {
+                            _changeMap = !_changeMap;
+                          });
+                        }),
                   ),
                 ),
-              )
-            : Stack(
-                children: [
-                  GoogleMap(
-                    mapType: _changeMap ? MapType.normal : MapType.hybrid,
-                    initialCameraPosition: _currentCameraPosition,
-                    markers: _markers == null ? [] : _markers,
-                    circles: _circles == null ? [] : _circles,
+                Positioned(
+                  top: 15,
+                  left: MediaQuery.of(context).size.width * 0.05,
+                  right: MediaQuery.of(context).size.width * 0.05,
+                  child: SearchMapPlaceWidget(
+                    placeholder: AppLocalizations.of(context)
+                        .translate('friends_location_screen', 'search'),
+                    darkMode: true,
+                    iconColor: Theme.of(context).backgroundColor,
+                    apiKey: GOOGLE_API_KEY,
+                    language: AppLocalizations.of(context).locale.languageCode,
+                    location: _currentCameraPosition.target,
+                    radius: 30000,
+                    onSelected: (Place place) async {
+                      final geolocation = await place.geolocation;
+
+                      final GoogleMapController controller =
+                          await _controller.future;
+                      controller.animateCamera(
+                          CameraUpdate.newLatLng(geolocation.coordinates));
+                      controller.animateCamera(
+                          CameraUpdate.newLatLngBounds(geolocation.bounds, 0));
+                    },
                   ),
-                  Positioned(
-                    top: 15,
-                    right: 15,
-                    child: Container(
-                      color: Theme.of(context).accentColor,
-                      padding: EdgeInsets.only(bottom: 5, right: 5),
-                      child: IconButton(
-                          icon: Icon(Icons.map,
-                              size: 40,
-                              color: Theme.of(context).backgroundColor),
-                          onPressed: () {
-                            setState(() {
-                              _changeMap = !_changeMap;
-                            });
-                          }),
-                    ),
-                  )
-                ],
-              ));
+                ),
+              ],
+            ),
+    );
   }
 }

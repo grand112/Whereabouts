@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:Whereabouts/helpers/app_localizations.dart';
+import 'package:Whereabouts/helpers/location_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:search_map_place/search_map_place.dart';
 import 'package:uuid/uuid.dart';
 
 class PickCircleScreen extends StatefulWidget {
@@ -12,6 +16,7 @@ class PickCircleScreen extends StatefulWidget {
 }
 
 class _PickCircleScreenState extends State<PickCircleScreen> {
+  Completer<GoogleMapController> _controller = Completer();
   CameraPosition _initialCameraPosition;
   Circle _circle;
   bool _changeMap = true;
@@ -61,6 +66,9 @@ class _PickCircleScreenState extends State<PickCircleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Theme.of(context).backgroundColor,
+        ),
         backgroundColor: Theme.of(context).accentColor,
         brightness: Brightness.dark,
         title: Text(
@@ -100,7 +108,11 @@ class _PickCircleScreenState extends State<PickCircleScreen> {
                   mapType: _changeMap ? MapType.normal : MapType.hybrid,
                   initialCameraPosition: _initialCameraPosition,
                   onTap: _selectOnMap,
-                  circles: _circle == null ? {} : {_circle}),
+                  circles: _circle == null ? {} : {_circle},
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                ),
           Positioned(
             bottom: 70,
             left: 15,
@@ -162,7 +174,34 @@ class _PickCircleScreenState extends State<PickCircleScreen> {
                 ],
               ),
             ),
-          )
+          ),
+          _initialCameraPosition == null
+              ? Container()
+              : Positioned(
+                  top: 15,
+                  left: MediaQuery.of(context).size.width * 0.05,
+                  right: MediaQuery.of(context).size.width * 0.05,
+                  child: SearchMapPlaceWidget(
+                    placeholder: AppLocalizations.of(context)
+                        .translate('friends_location_screen', 'search'),
+                    darkMode: true,
+                    iconColor: Theme.of(context).backgroundColor,
+                    apiKey: GOOGLE_API_KEY,
+                    language: AppLocalizations.of(context).locale.languageCode,
+                    location: _initialCameraPosition.target,
+                    radius: 30000,
+                    onSelected: (Place place) async {
+                      final geolocation = await place.geolocation;
+
+                      final GoogleMapController controller =
+                          await _controller.future;
+                      controller.animateCamera(
+                          CameraUpdate.newLatLng(geolocation.coordinates));
+                      controller.animateCamera(
+                          CameraUpdate.newLatLngBounds(geolocation.bounds, 0));
+                    },
+                  ),
+                ),
         ],
       ),
     );

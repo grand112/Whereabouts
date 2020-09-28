@@ -46,6 +46,7 @@ dependencies:
   permission_handler: ^5.0.1
   connectivity: ^0.4.8+6
   intl: ^0.16.1
+  search_map_place: ^0.3.0
 
 dev_dependencies:
   flutter_test:

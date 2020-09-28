@@ -137,7 +137,8 @@
         "you": "Ty",
         "profile": "Profil",
         "locationFriends": "Aktualna lokalizacja Twoich\nznajomcyh",
-        "distance": "Odległość od\nCiebie:"
+        "distance": "Odległość od\nCiebie:",
+        "search": "Wyszukaj miejsce"
     },
     "friends_screen": {
         "stay": "Pozostań w kontakcie ze znajomymi",

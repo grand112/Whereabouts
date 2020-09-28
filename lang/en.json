@@ -137,7 +137,8 @@
     "you": "You",
     "profile": "Profile",
     "locationFriends": "Current location of\nyour friends",
-    "distance": "Distance to\nyou:"
+    "distance": "Distance to\nyou:",
+    "search": "Search for a place"
   },
   "friends_screen": {
     "stay": "Stay in touch with your friends",
