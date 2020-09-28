@@ -14,15 +14,31 @@ class UsersScreen extends StatefulWidget {
 
 class _UsersScreenState extends State<UsersScreen> {
   FirebaseUser _user;
+  List<String> _friendList=[];
 
   @override
   void initState() {
     super.initState();
     _getUserInfo();
+    _getFriends();
   }
 
   Future<void> _getUserInfo() async {
     _user = await FirebaseAuth.instance.currentUser();
+  }
+
+  Future<void> _getFriends() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    QuerySnapshot friends = await Firestore.instance
+        .collection('users')
+        .document(user.uid)
+        .collection('friends')
+        .where("accepted", isEqualTo: "yes")
+        .getDocuments();
+    
+    friends.documents.forEach((element) { 
+      _friendList.add(element['sentBy']);
+    });
   }
 
   Future<void> _sendInvite(String userId) async {
@@ -109,7 +125,7 @@ class _UsersScreenState extends State<UsersScreen> {
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (ctx, index) {
-                    return docs[index]['userId'] == _user.uid
+                    return docs[index]['userId'] == _user.uid  || _friendList.contains(docs[index]['userId'])
                         ? Container()
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.end,
