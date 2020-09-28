@@ -28,7 +28,7 @@ class SwipeImage extends StatelessWidget {
             decoration: BoxDecoration(
               color: Theme.of(context).backgroundColor,
               image:
-                  DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+                  DecorationImage(image: AssetImage(image), fit: BoxFit.fitHeight),
             ),
           ),
           Container(

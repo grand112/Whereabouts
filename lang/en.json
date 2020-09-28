@@ -1,13 +1,13 @@
 {
   "welcome_screen": {
     "title0": "What is Whereabouts?",
-    "content0": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "content0": "Whereabouts is an application created for people who like to discover new places, want to meet new people, stay in constant contact with their friends, and monitor the location of their loved ones.",
     "title1": "Discover",
-    "content1": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "content1": "Discover the soul of a traveler in you, explore new places, and share them with your friends.",
     "title2": "Keep your family safe",
-    "content2": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "content2": "Follow the location of your loved ones and friends, receive notifications, and observe places that are important to you.",
     "title3": "Stay in touch with your friends",
-    "content3": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\'s standard dummy text ever since 1",
+    "content3": "Meeting friends has never been easier! Thanks to Whereabouts you will stay in constant contact with your friends and meet new people from your area.",
     "log_in": "LOG IN",
     "create_account": "CREATE AN\n ACCOUNT"
   },
